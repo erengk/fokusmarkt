@@ -1,0 +1,9 @@
+/* Fokus Markt - Main CSS File */
+/* This file imports all CSS modules */
+
+/* Import CSS Modules */
+@import url('modules/base.css');
+@import url('modules/header.css');
+@import url('modules/footer.css');
+@import url('modules/home.css');
+@import url('modules/category.css');

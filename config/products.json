@@ -1,0 +1,438 @@
+{
+  "categories": {
+    "joint_health": {
+      "tr": {
+        "name": "Eklem Sağlığı",
+        "description": "Evcil hayvanlarınızın eklem sağlığı için özel ürünler",
+        "subcategories": {
+          "cartilagoflex": "CARTILAGOFLEX"
+        }
+      },
+      "en": {
+        "name": "Joint Health",
+        "description": "Special products for your pets' joint health",
+        "subcategories": {
+          "cartilagoflex": "CARTILAGOFLEX"
+        }
+      },
+      "de": {
+        "name": "Gelenkgesundheit",
+        "description": "Spezielle Produkte für die Gelenkgesundheit Ihrer Haustiere",
+        "subcategories": {
+          "cartilagoflex": "CARTILAGOFLEX"
+        }
+      }
+    },
+    "immunotherapy": {
+      "tr": {
+        "name": "İmmünoterapi",
+        "description": "Bağışıklık sistemini güçlendiren ürünler",
+        "subcategories": {
+          "canivir": "CANIVIR",
+          "felovir": "FELOVIR",
+          "petimmun": "PETIMMUN"
+        }
+      },
+      "en": {
+        "name": "Immunotherapy",
+        "description": "Products that strengthen the immune system",
+        "subcategories": {
+          "canivir": "CANIVIR",
+          "felovir": "FELOVIR",
+          "petimmun": "PETIMMUN"
+        }
+      },
+      "de": {
+        "name": "Immuntherapie",
+        "description": "Produkte zur Stärkung des Immunsystems",
+        "subcategories": {
+          "canivir": "CANIVIR",
+          "felovir": "FELOVIR",
+          "petimmun": "PETIMMUN"
+        }
+      }
+    },
+    "calming": {
+      "tr": {
+        "name": "Sakinleştirici",
+        "description": "Evcil hayvanlarınızın sakinleşmesi için ürünler",
+        "subcategories": {
+          "ease_off": "EASE OFF"
+        }
+      },
+      "en": {
+        "name": "Calming",
+        "description": "Products to calm your pets",
+        "subcategories": {
+          "ease_off": "EASE OFF"
+        }
+      },
+      "de": {
+        "name": "Beruhigung",
+        "description": "Produkte zur Beruhigung Ihrer Haustiere",
+        "subcategories": {
+          "ease_off": "EASE OFF"
+        }
+      }
+    },
+    "urinary_system": {
+      "tr": {
+        "name": "Üriner Sistem",
+        "description": "Üriner sistem sağlığı için özel ürünler",
+        "subcategories": {
+          "bladder_control": "BLADDER CONTROL",
+          "uticare": "UTICARE"
+        }
+      },
+      "en": {
+        "name": "Urinary System",
+        "description": "Special products for urinary system health",
+        "subcategories": {
+          "bladder_control": "BLADDER CONTROL",
+          "uticare": "UTICARE"
+        }
+      },
+      "de": {
+        "name": "Harnsystem",
+        "description": "Spezielle Produkte für die Harnsystemgesundheit",
+        "subcategories": {
+          "bladder_control": "BLADDER CONTROL",
+          "uticare": "UTICARE"
+        }
+      }
+    },
+    "skin_coat_health": {
+      "tr": {
+        "name": "Tüy ve Deri Sağlığı",
+        "description": "Tüy ve deri sağlığı için özel ürünler",
+        "subcategories": {
+          "dermacumin": "DERMACUMIN",
+          "retino_a": "RETINO-A",
+          "derma_zn": "DERMA Zn",
+          "derma_hairball": "DERMA HAIRBALL",
+          "salmonoil": "SALMONOIL"
+        }
+      },
+      "en": {
+        "name": "Skin & Coat Health",
+        "description": "Special products for skin and coat health",
+        "subcategories": {
+          "dermacumin": "DERMACUMIN",
+          "retino_a": "RETINO-A",
+          "derma_zn": "DERMA Zn",
+          "derma_hairball": "DERMA HAIRBALL",
+          "salmonoil": "SALMONOIL"
+        }
+      },
+      "de": {
+        "name": "Haut- & Fellgesundheit",
+        "description": "Spezielle Produkte für Haut- und Fellgesundheit",
+        "subcategories": {
+          "dermacumin": "DERMACUMIN",
+          "retino_a": "RETINO-A",
+          "derma_zn": "DERMA Zn",
+          "derma_hairball": "DERMA HAIRBALL",
+          "salmonoil": "SALMONOIL"
+        }
+      }
+    },
+    "kidney_health": {
+      "tr": {
+        "name": "Böbrek Sağlığı",
+        "description": "Böbrek sağlığı için özel ürünler",
+        "subcategories": {
+          "renacure": "RENACURE"
+        }
+      },
+      "en": {
+        "name": "Kidney Health",
+        "description": "Special products for kidney health",
+        "subcategories": {
+          "renacure": "RENACURE"
+        }
+      },
+      "de": {
+        "name": "Nierengesundheit",
+        "description": "Spezielle Produkte für die Nierengesundheit",
+        "subcategories": {
+          "renacure": "RENACURE"
+        }
+      }
+    },
+    "digestive_system": {
+      "tr": {
+        "name": "Sindirim Sistemi",
+        "description": "Sindirim sistemi sağlığı için ürünler",
+        "subcategories": {
+          "canivir": "CANIVIR",
+          "coprophagia": "COPROPHAGIA",
+          "petimmun": "PETIMMUN",
+          "derma_hairball": "DERMA HAIRBALL"
+        }
+      },
+      "en": {
+        "name": "Digestive System",
+        "description": "Products for digestive system health",
+        "subcategories": {
+          "canivir": "CANIVIR",
+          "coprophagia": "COPROPHAGIA",
+          "petimmun": "PETIMMUN",
+          "derma_hairball": "DERMA HAIRBALL"
+        }
+      },
+      "de": {
+        "name": "Verdauungssystem",
+        "description": "Produkte für die Verdauungssystemgesundheit",
+        "subcategories": {
+          "canivir": "CANIVIR",
+          "coprophagia": "COPROPHAGIA",
+          "petimmun": "PETIMMUN",
+          "derma_hairball": "DERMA HAIRBALL"
+        }
+      }
+    },
+    "bone_health": {
+      "tr": {
+        "name": "Kemik Sağlığı",
+        "description": "Kemik sağlığı için vitamin ve takviyeler",
+        "subcategories": {
+          "multivit": "MULTIVIT"
+        }
+      },
+      "en": {
+        "name": "Bone Health",
+        "description": "Vitamins and supplements for bone health",
+        "subcategories": {
+          "multivit": "MULTIVIT"
+        }
+      },
+      "de": {
+        "name": "Knochengesundheit",
+        "description": "Vitamine und Nahrungsergänzungsmittel für die Knochengesundheit",
+        "subcategories": {
+          "multivit": "MULTIVIT"
+        }
+      }
+    },
+    "pregnancy_nursing": {
+      "tr": {
+        "name": "Gebelik ve Emzirme Sağlığı",
+        "description": "Gebelik ve emzirme dönemi için özel ürünler",
+        "subcategories": {
+          "mb_care": "M&B CARE"
+        }
+      },
+      "en": {
+        "name": "Pregnancy & Nursing Health",
+        "description": "Special products for pregnancy and nursing period",
+        "subcategories": {
+          "mb_care": "M&B CARE"
+        }
+      },
+      "de": {
+        "name": "Schwangerschaft & Stillzeit",
+        "description": "Spezielle Produkte für Schwangerschaft und Stillzeit",
+        "subcategories": {
+          "mb_care": "M&B CARE"
+        }
+      }
+    },
+    "coprophagia": {
+      "tr": {
+        "name": "Dışkı Yeme",
+        "description": "Dışkı yeme sorunu için özel ürünler",
+        "subcategories": {
+          "coprophagia": "COPROPHAGIA"
+        }
+      },
+      "en": {
+        "name": "Coprophagia",
+        "description": "Special products for coprophagia problem",
+        "subcategories": {
+          "coprophagia": "COPROPHAGIA"
+        }
+      },
+      "de": {
+        "name": "Koprophagie",
+        "description": "Spezielle Produkte für Koprophagie-Problem",
+        "subcategories": {
+          "coprophagia": "COPROPHAGIA"
+        }
+      }
+    },
+    "cold_flu": {
+      "tr": {
+        "name": "Soğuk Algınlığı",
+        "description": "Soğuk algınlığı ve grip için ürünler",
+        "subcategories": {
+          "phytospan": "PHYTOSPAN",
+          "petimmun": "PETIMMUN",
+          "o2_care": "O2 CARE"
+        }
+      },
+      "en": {
+        "name": "Cold & Flu",
+        "description": "Products for cold and flu",
+        "subcategories": {
+          "phytospan": "PHYTOSPAN",
+          "petimmun": "PETIMMUN",
+          "o2_care": "O2 CARE"
+        }
+      },
+      "de": {
+        "name": "Erkältung & Grippe",
+        "description": "Produkte für Erkältung und Grippe",
+        "subcategories": {
+          "phytospan": "PHYTOSPAN",
+          "petimmun": "PETIMMUN",
+          "o2_care": "O2 CARE"
+        }
+      }
+    },
+    "dental_health": {
+      "tr": {
+        "name": "Ağız ve Diş Sağlığı",
+        "description": "Ağız ve diş sağlığı için özel ürünler",
+        "subcategories": {
+          "dental_care": "DENTAL CARE"
+        }
+      },
+      "en": {
+        "name": "Dental Health",
+        "description": "Special products for oral and dental health",
+        "subcategories": {
+          "dental_care": "DENTAL CARE"
+        }
+      },
+      "de": {
+        "name": "Zahn- & Mundgesundheit",
+        "description": "Spezielle Produkte für Zahn- und Mundgesundheit",
+        "subcategories": {
+          "dental_care": "DENTAL CARE"
+        }
+      }
+    }
+  },
+  "pet_types": {
+    "cats": {
+      "tr": "Kediler",
+      "en": "Cats",
+      "de": "Katzen"
+    },
+    "dogs": {
+      "tr": "Köpekler",
+      "en": "Dogs",
+      "de": "Hunde"
+    },
+    "birds": {
+      "tr": "Kuşlar",
+      "en": "Birds",
+      "de": "Vögel"
+    },
+    "fish": {
+      "tr": "Balıklar",
+      "en": "Fish",
+      "de": "Fische"
+    },
+    "small_animals": {
+      "tr": "Küçük Hayvanlar",
+      "en": "Small Animals",
+      "de": "Kleintiere"
+    }
+  },
+  "product_forms": {
+    "jel": {
+      "tr": "Jel",
+      "en": "Gel",
+      "de": "Gel"
+    },
+    "malt": {
+      "tr": "Malt",
+      "en": "Malt",
+      "de": "Malz"
+    },
+    "tablet": {
+      "tr": "Tablet",
+      "en": "Tablet",
+      "de": "Tablette"
+    }
+  },
+  "products": {
+    "DERMACUMIN": {
+      "forms": ["jel"],
+      "categories": ["skin_coat_health"]
+    },
+    "PETIMMUN": {
+      "forms": ["jel", "malt", "tablet"],
+      "categories": ["immunotherapy", "digestive_system", "cold_flu"]
+    },
+    "PHYTOSPAN": {
+      "forms": ["jel", "malt", "tablet"],
+      "categories": ["cold_flu"]
+    },
+    "RETINO-A": {
+      "forms": ["jel"],
+      "categories": ["skin_coat_health"]
+    },
+    "BLADDER_CONTROL": {
+      "forms": ["malt", "tablet"],
+      "categories": ["urinary_system"]
+    },
+    "CANIVIR": {
+      "forms": ["malt", "tablet"],
+      "categories": ["immunotherapy", "digestive_system"]
+    },
+    "CARTILAGOFLEX": {
+      "forms": ["malt", "tablet"],
+      "categories": ["joint_health"]
+    },
+    "DERMA_ZN": {
+      "forms": ["malt", "tablet"],
+      "categories": ["skin_coat_health"]
+    },
+    "EASE_OFF": {
+      "forms": ["malt", "tablet"],
+      "categories": ["calming"]
+    },
+    "FELOVIR": {
+      "forms": ["malt"],
+      "categories": ["immunotherapy"]
+    },
+    "COPROPHAGIA": {
+      "forms": ["malt", "tablet"],
+      "categories": ["digestive_system", "coprophagia"]
+    },
+    "MB_CARE": {
+      "forms": ["malt", "tablet"],
+      "categories": ["pregnancy_nursing"]
+    },
+    "MULTIVIT": {
+      "forms": ["malt", "tablet"],
+      "categories": ["bone_health"]
+    },
+    "O2_CARE": {
+      "forms": ["malt", "tablet"],
+      "categories": ["cold_flu"]
+    },
+    "RENACURE": {
+      "forms": ["malt", "tablet"],
+      "categories": ["kidney_health"]
+    },
+    "UTICARE": {
+      "forms": ["malt", "tablet"],
+      "categories": ["urinary_system"]
+    },
+    "DERMA_HAIRBALL": {
+      "forms": ["tablet"],
+      "categories": ["skin_coat_health", "digestive_system"]
+    },
+    "DENTAL_CARE": {
+      "forms": ["tablet"],
+      "categories": ["dental_health"]
+    },
+    "SALMONOIL": {
+      "forms": ["tablet"],
+      "categories": ["skin_coat_health"]
+    }
+  }
+}
