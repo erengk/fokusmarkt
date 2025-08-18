@@ -124,7 +124,7 @@ $categories = $product->getAllCategoriesWithInfo();
                                     foreach ($productImages as $index => $image) {
                                         $activeClass = $index === 0 ? 'active' : '';
                                         echo '<div class="slider-item ' . $activeClass . '">';
-                                        echo '<img src="' . $image['url'] . '" alt="' . ($image['alt'] ?? 'Ürün görseli') . '" loading="lazy">';
+                                        echo '<img src="' . $image['url'] . '" alt="' . $image['alt'] . '" loading="lazy">';
                                         echo '</div>';
                                     }
                                 } else {

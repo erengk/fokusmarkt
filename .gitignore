@@ -30,6 +30,11 @@ logs/
 cache/
 storage/cache/
 
+# Assets folder (product images, videos, etc.)
+assets/
+assets/products/
+assets/views/
+
 # But include important files
 !database/*.sql
 !config/*.json

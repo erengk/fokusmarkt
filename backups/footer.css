@@ -1,0 +1,185 @@
+/* Footer */
+.footer {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: var(--text-light);
+    padding: 3rem 0 1rem;
+    transition: background-color 0.3s ease;
+    border-top: none;
+}
+
+/* Footer light-mode palette using corporate colors */
+.footer {
+    --footer-heading-color: #ffffff;
+    --footer-text-color: rgba(255, 255, 255, 0.95);
+    --footer-muted-text: rgba(255, 255, 255, 0.8);
+    --footer-link-color: #D6EEFF;
+    --footer-link-hover: #ffffff;
+    --footer-divider: rgba(255, 255, 255, 0.35);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3, .footer-section h4 {
+    margin-bottom: 1rem;
+    color: var(--text-light);
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Footer başlıkları - her zaman okunaklı */
+.footer-section h3, .footer-section h4 {
+    color: var(--footer-heading-color) !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    font-weight: 700;
+}
+
+/* H4 başlıkları için divider */
+.footer-section h4 {
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--footer-divider);
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    opacity: 0.9;
+}
+
+/* Footer paragraf metinleri */
+.footer-section p {
+    color: var(--text-light);
+    opacity: 0.9;
+}
+
+/* Light mode için footer linkleri */
+.footer[data-theme="light"] .footer-section ul li a,
+html[data-theme="light"] .footer .footer-section ul li a,
+body[data-theme="light"] .footer .footer-section ul li a {
+    color: var(--footer-link-color);
+    text-shadow: none;
+    font-weight: 600;
+}
+
+/* Light mode için footer paragraf metinleri */
+.footer[data-theme="light"] .footer-section p,
+html[data-theme="light"] .footer .footer-section p,
+body[data-theme="light"] .footer .footer-section p {
+    color: var(--footer-muted-text);
+    text-shadow: none;
+    opacity: 1;
+}
+
+.footer-section ul li a:hover {
+    color: var(--text-light);
+    opacity: 1;
+}
+
+/* Light mode link hover state */
+.footer[data-theme="light"] .footer-section ul li a:hover,
+html[data-theme="light"] .footer .footer-section ul li a:hover,
+body[data-theme="light"] .footer .footer-section ul li a:hover {
+    color: var(--footer-link-hover);
+    text-decoration: underline;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-links a {
+    color: var(--text-light);
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+    opacity: 0.9;
+}
+
+.social-links a:hover {
+    color: var(--text-light);
+    opacity: 1;
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+}
+
+/* Light mode: crisper divider */
+.footer[data-theme="light"] .footer-bottom,
+html[data-theme="light"] .footer .footer-bottom,
+body[data-theme="light"] .footer .footer-bottom {
+    border-top: 1px solid var(--footer-divider);
+}
+
+.footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Light mode için footer bottom yazısı */
+.footer[data-theme="light"] .footer-bottom-content p,
+html[data-theme="light"] .footer .footer-bottom-content p,
+body[data-theme="light"] .footer .footer-bottom-content p {
+    color: var(--footer-text-color);
+    text-shadow: none;
+    font-weight: 500;
+}
+
+.payment-methods {
+    display: flex;
+    gap: 1rem;
+    font-size: 1.5rem;
+    color: var(--text-light);
+    opacity: 0.9;
+}
+
+/* Light mode için payment methods */
+.footer[data-theme="light"] .payment-methods,
+html[data-theme="light"] .footer .payment-methods,
+body[data-theme="light"] .footer .payment-methods {
+    color: var(--footer-text-color);
+    text-shadow: none;
+}
+
+/* Payment methods styling */
+.payment-icon {
+    height: 35px;
+    width: auto;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.payment-icon:hover {
+    opacity: 1;
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .footer-bottom-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}

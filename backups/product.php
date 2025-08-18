@@ -2,8 +2,8 @@
 $lang = Language::getInstance();
 $product = Product::getInstance();
 
-// Get product slug from URL or routing
-$productSlug = $productSlug ?? $_GET['slug'] ?? '';
+// Get product slug from URL
+$productSlug = $_GET['slug'] ?? $productSlug ?? '';
 
 if (empty($productSlug)) {
     header('Location: /404');
