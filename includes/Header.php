@@ -23,12 +23,12 @@ $currentLang = $lang->getCurrentLang();
                         <span><?php echo strtoupper($currentLang); ?></span>
                         <i class="fas fa-chevron-down"></i>
                     </button>
-                    <div class="lang-menu" id="langMenu">
+                    <div class="lang-menu" id="langMenu" style="display: none;">
                         <?php foreach ($lang->getSupportedLanguages() as $langCode): ?>
-                            <a href="?lang=<?php echo $langCode; ?>" class="lang-option">
-                                <span class="lang-flag"><?php echo $lang->getLanguageFlag($langCode); ?></span>
-                                <span class="lang-name"><?php echo $lang->getLanguageName($langCode); ?></span>
-                            </a>
+                        <a href="/language?lang=<?php echo $langCode; ?>&redirect=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>" class="lang-option">
+                            <span class="lang-flag"><?php echo $lang->getLanguageFlag($langCode); ?></span>
+                            <span class="lang-name"><?php echo $lang->getLanguageName($langCode); ?></span>
+                        </a>
                         <?php endforeach; ?>
                     </div>
                 </div>
@@ -74,88 +74,94 @@ $currentLang = $lang->getCurrentLang();
                                     <div class="dropdown-section">
                                         <h4><?php echo $lang->get('category.agiz-ve-dis-sagligi'); ?></h4>
                                         <ul>
-                                            <li><a href="/urun/dental-care">DENTAL CARE (Tablet)</a></li>
+                                            <li><a href="/dental-care">Dental Care</a></li>
                                         </ul>
                                     </div>
                                     <div class="dropdown-section">
                                         <h4><?php echo $lang->get('category.tuy-ve-deri-sagligi'); ?></h4>
                                         <ul>
-                                            <li><a href="/urun/dermacumin">DERMACUMIN (Jel)</a></li>
-                                            <li><a href="/urun/retino-a">RETINO-A (Jel)</a></li>
-                                            <li><a href="/urun/derma-zn">DERMA Zn (Malt/Tablet)</a></li>
-                                            <li><a href="/urun/derma-hairball">DERMA HAIRBALL (Tablet)</a></li>
-                                            <li><a href="/urun/salmon-oil">SALMON OIL (Tablet)</a></li>
+                                            <li><a href="/dermacumin">Dermacumin</a></li>
+                                            <li><a href="/retino-a">Retino-A</a></li>
+                                            <li><a href="/derma-zn">Derma Zn</a></li>
+                                            <li><a href="/derma-hairball">Derma Hairball</a></li>
+                                            <li><a href="/salmonoil">Salmon Oil</a></li>
                                         </ul>
                                     </div>
                                     <div class="dropdown-section">
                                         <h4><?php echo $lang->get('category.uriner-sistem'); ?></h4>
                                         <ul>
-                                            <li><a href="/urun/bladder-control">BLADDER CONTROL (Malt/Tablet)</a></li>
-                                            <li><a href="/urun/uticare">UTICARE (Malt/Tablet)</a></li>
+                                            <li><a href="/bladder-control">Bladder Control</a></li>
+                                            <li><a href="/uticare">Uticare</a></li>
                                         </ul>
                                     </div>
                                     <div class="dropdown-section">
                                         <h4><?php echo $lang->get('category.bobrek-sagligi'); ?></h4>
                                         <ul>
-                                            <li><a href="/urun/renacure">RENACURE (Malt)</a></li>
+                                            <li><a href="/renacure">Renacure</a></li>
                                         </ul>
                                     </div>
                                     <div class="dropdown-section">
                                         <h4><?php echo $lang->get('category.sindirim-sistemi'); ?></h4>
                                         <ul>
-                                            <li><a href="/urun/canivir">CANIVIR (Malt/Tablet)</a></li>
-                                            <li><a href="/urun/coprophagia">COPROPHAGIA (Malt/Tablet)</a></li>
-                                            <li><a href="/urun/petimmun">PETIMMUN (Jel/Malt/Tablet)</a></li>
-                                            <li><a href="/urun/derma-hairball">DERMA HAIRBALL (Tablet)</a></li>
+                                            <li><a href="/canivir">Canivir</a></li>
+                                            <li><a href="/coprophagia">Coprophagia</a></li>
+                                            <li><a href="/petimmun">Petimmun</a></li>
+                                            <li><a href="/derma-hairball">Derma Hairball</a></li>
                                         </ul>
                                     </div>
                                     <div class="dropdown-section">
                                         <h4><?php echo $lang->get('category.solunum-sistemi'); ?></h4>
                                         <ul>
-                                            <li><a href="/urun/o2-care">O2 CARE (Malt/Tablet)</a></li>
-                                            <li><a href="/urun/phytospan">PHYTOSPAN (Jel/Malt/Tablet)</a></li>
-                                            <li><a href="/urun/petimmun">PETIMMUN (Jel/Malt/Tablet)</a></li>
+                                            <li><a href="/o2-care">O2 Care</a></li>
+                                            <li><a href="/phytospan">Phytospan</a></li>
+                                            <li><a href="/petimmun">Petimmun</a></li>
                                         </ul>
                                     </div>
                                     <div class="dropdown-section">
                                         <h4><?php echo $lang->get('category.eklem-sagligi'); ?></h4>
                                         <ul>
-                                            <li><a href="/urun/cartilagoflex">CARTILAGOFLEX (Malt/Tablet)</a></li>
-                                            <li><a href="/urun/multivit">MULTIVIT (Malt/Tablet)</a></li>
+                                            <li><a href="/cartilagoflex">Cartilagoflex</a></li>
+                                            <li><a href="/multivit">Multivit</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="dropdown-section">
+                                        <h4><?php echo $lang->get('category.kemik-sagligi'); ?></h4>
+                                        <ul>
+                                            <li><a href="/multivit">Multivit</a></li>
                                         </ul>
                                     </div>
                                     <div class="dropdown-section">
                                         <h4><?php echo $lang->get('category.sakinlestirici'); ?></h4>
                                         <ul>
-                                            <li><a href="/urun/ease-off">EASE OFF (Malt/Tablet)</a></li>
+                                            <li><a href="/ease-off">Ease Off</a></li>
                                         </ul>
                                     </div>
                                     <div class="dropdown-section">
                                         <h4><?php echo $lang->get('category.gebelik-ve-emzirme-sagligi'); ?></h4>
                                         <ul>
-                                            <li><a href="/urun/m-b-care">M&B CARE (Malt/Tablet)</a></li>
+                                            <li><a href="/m-b-care">M&B Care</a></li>
                                         </ul>
                                     </div>
                                     <div class="dropdown-section">
                                         <h4><?php echo $lang->get('category.immunoterapi'); ?></h4>
                                         <ul>
-                                            <li><a href="/urun/canivir">CANIVIR (Malt/Tablet)</a></li>
-                                            <li><a href="/urun/felovir">FELOVIR (Malt)</a></li>
-                                            <li><a href="/urun/petimmun">PETIMMUN (Jel/Malt/Tablet)</a></li>
+                                            <li><a href="/canivir">Canivir</a></li>
+                                            <li><a href="/felovir">Felovir</a></li>
+                                            <li><a href="/petimmun">Petimmun</a></li>
                                         </ul>
                                     </div>
                                     <div class="dropdown-section">
                                         <h4><?php echo $lang->get('category.diski-yeme'); ?></h4>
                                         <ul>
-                                            <li><a href="/urun/coprophagia">COPROPHAGIA (Malt/Tablet)</a></li>
+                                            <li><a href="/coprophagia">Coprophagia</a></li>
                                         </ul>
                                     </div>
                                     <div class="dropdown-section">
                                         <h4><?php echo $lang->get('category.soguk-alginligi'); ?></h4>
                                         <ul>
-                                            <li><a href="/urun/phytospan">PHYTOSPAN (Jel/Malt/Tablet)</a></li>
-                                            <li><a href="/urun/o2-care">O2 CARE (Malt/Tablet)</a></li>
-                                            <li><a href="/urun/petimmun">PETIMMUN (Jel/Malt/Tablet)</a></li>
+                                            <li><a href="/phytospan">Phytospan</a></li>
+                                            <li><a href="/o2-care">O2 Care</a></li>
+                                            <li><a href="/petimmun">Petimmun</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -171,11 +177,7 @@ $currentLang = $lang->getCurrentLang();
                         </li>
                         
                         <li class="nav-item">
-                            <a href="/where-to-buy" class="nav-link"><?php echo $lang->get('nav.where_to_buy'); ?></a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a href="/subscribe" class="nav-link"><?php echo $lang->get('nav.subscribe'); ?></a>
+                            <a href="/user-submissions" class="nav-link"><?php echo $lang->get('nav.user_submissions'); ?></a>
                         </li>
                         
                         <li class="nav-item">
@@ -184,6 +186,12 @@ $currentLang = $lang->getCurrentLang();
                         
                         <li class="nav-item">
                             <a href="/contact" class="nav-link"><?php echo $lang->get('nav.contact'); ?></a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+                                <i class="fas fa-moon" id="theme-icon"></i>
+                            </button>
                         </li>
                     </ul>
                 </nav>
@@ -194,10 +202,5 @@ $currentLang = $lang->getCurrentLang();
             </div>
         </div>
     </header>
-    
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
-        <i class="fas fa-moon" id="theme-icon"></i>
-    </button>
     
     <script src="/public/js/main.js"></script>

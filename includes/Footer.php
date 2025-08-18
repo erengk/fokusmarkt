@@ -57,10 +57,7 @@
                 <div class="footer-bottom-content">
                     <p>&copy; <?php echo date('Y'); ?> <?php echo SITE_NAME; ?>. <?php echo $lang->get('footer.all_rights_reserved'); ?></p>
                     <div class="payment-methods">
-                        <i class="fab fa-cc-visa"></i>
-                        <i class="fab fa-cc-mastercard"></i>
-                        <i class="fab fa-cc-paypal"></i>
-                        <i class="fab fa-bitcoin"></i>
+                        <img src="/assets/iyzico-logo-pack/footer_iyzico_ile_ode/Colored/logo_band_colored@2x.png" alt="Visa, Mastercard, iyzico, Troy" class="payment-icon">
                     </div>
                 </div>
             </div>

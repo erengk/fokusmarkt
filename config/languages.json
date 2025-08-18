@@ -1,9 +1,11 @@
 {
   "tr": {
     "nav": {
+      "home": "Ana Sayfa",
       "categories": "Kategoriler",
       "indications": "Endikasyonlar",
       "articles": "Makaleler",
+      "user_submissions": "Sizden Gelenler",
       "about": "Hakkımızda",
       "contact": "Bize Ulaşın",
       "dog_nutrition": "Köpek Beslenmesi",
@@ -60,7 +62,7 @@
       "welcome": "Fokus Markt'e Hoş Geldiniz",
       "subtitle": "Evcil hayvanlarınız için en kaliteli ürünler",
       "shop_now": "Şimdi Alışveriş Yap",
-      "featured_products": "Öne Çıkan Ürünler",
+      "featured_products": "Ürün Kategorileri",
       "new_arrivals": "Yeni Gelenler",
       "best_sellers": "En Çok Satanlar",
       "hero_title_1": "Onların Sağlığı, Sizin Huzurunuz",
@@ -97,6 +99,77 @@
       "cat_products_showing": "Kedi ürünleri gösteriliyor",
       "dog_products_showing": "Köpek ürünleri gösteriliyor",
       "categories_count": "kategori"
+    },
+    "product": {
+      "reviews_count": "değerlendirme",
+      "key_benefits": "Temel Faydalar",
+      "add_to_cart": "Sepete Ekle",
+      "in_stock": "Stokta Mevcut",
+      "payment_options": "Ödeme Seçenekleri",
+      "indications": "Endikasyonlar",
+      "ingredients": "İçerik",
+      "usage": "Kullanım",
+      "specifications": "Özellikler",
+      "reviews": "Değerlendirmeler",
+      "indications_title": "Kullanım Alanları",
+      "ingredients_title": "İçerik Bilgisi",
+      "usage_title": "Kullanım Talimatları",
+      "specifications_title": "Teknik Özellikler",
+      "reviews_title": "Müşteri Değerlendirmeleri",
+      "ingredient": "Bileşen",
+      "function": "Görevi",
+      "dosage": "Dozaj",
+      "frequency": "Kullanım Sıklığı",
+      "warnings": "Uyarılar",
+      "dosage_default": "Her 5 kg vücut ağırlığı için 1 ml",
+      "frequency_default": "Günde 2 kez, yemekle birlikte",
+      "form": "Form",
+      "weight": "Ağırlık",
+      "shelf_life": "Raf Ömrü",
+      "storage": "Saklama Koşulları",
+      "category": "Kategori",
+      "sku": "Ürün Kodu",
+      "total_reviews": "toplam değerlendirme",
+      "related_products": "İlgili Ürünler",
+      "view_details": "Detayları Gör",
+      "faq_title": "Sıkça Sorulan Sorular",
+      "faq_side_effects": "Yan etkisi var mı?",
+      "faq_effect_time": "Ne kadar sürede etki gösterir?",
+      "faq_cats_dogs": "Kediler ve köpekler için aynı mı?",
+      "faq_side_effects_answer": "Bu ürün doğal bileşenlerden oluştuğu için yan etki riski çok düşüktür. Ancak herhangi bir alerjik reaksiyon durumunda veterinerinize danışınız.",
+      "faq_effect_time_answer": "Ürünün etkisi genellikle 1-2 hafta içinde görülmeye başlar. Tam etki için düzenli kullanım önemlidir.",
+      "faq_cats_dogs_answer": "Bu ürün hem kedi hem de köpekler için uygundur. Dozaj bilgileri hayvanın ağırlığına göre değişmektedir.",
+      "added_to_cart": "Ürün sepete eklendi!"
+    },
+    "products": {
+      "cartilagoflex": {
+        "name": "Cartilagoflex - Eklem Sağlığı Destekleyici",
+        "description": "Eklem sağlığını destekleyen doğal formül"
+      },
+      "canivir": {
+        "name": "Canivir - Bağışıklık Sistemi Destekleyici",
+        "description": "Köpekler için bağışıklık sistemi güçlendirici"
+      },
+      "felovir": {
+        "name": "Felovir - Bağışıklık Sistemi Destekleyici",
+        "description": "Kediler için bağışıklık sistemi güçlendirici"
+      },
+      "petimmun": {
+        "name": "Petimmun - Bağışıklık Sistemi Destekleyici",
+        "description": "Evcil hayvanlar için bağışıklık sistemi güçlendirici"
+      },
+      "ease-off": {
+        "name": "Ease Off - Sakinleştirici",
+        "description": "Evcil hayvanlar için doğal sakinleştirici"
+      },
+      "bladder-control": {
+        "name": "Bladder Control - Mesane Kontrolü",
+        "description": "Mesane kontrolü için özel formül"
+      },
+      "uticare": {
+        "name": "Uticare - Üriner Sistem Destekleyici",
+        "description": "Üriner sistem sağlığını destekleyen ürün"
+      }
     },
     "category": {
       "subcategories": "alt kategori",
@@ -183,9 +256,11 @@
   },
   "en": {
     "nav": {
+      "home": "Home",
       "categories": "Categories",
       "indications": "Indications",
       "articles": "Articles",
+      "user_submissions": "User Submissions",
       "about": "About",
       "contact": "Contact Us",
       "dog_nutrition": "Dog Nutrition",
@@ -242,7 +317,7 @@
       "welcome": "Welcome to Fokus Markt",
       "subtitle": "Premium products for your pets",
       "shop_now": "Shop Now",
-      "featured_products": "Featured Products",
+      "featured_products": "Product Categories",
       "new_arrivals": "New Arrivals",
       "best_sellers": "Best Sellers",
       "hero_title_1": "Their Health, Your Peace",
@@ -279,6 +354,77 @@
       "cat_products_showing": "Cat products showing",
       "dog_products_showing": "Dog products showing",
       "categories_count": "categories"
+    },
+    "product": {
+      "reviews_count": "reviews",
+      "key_benefits": "Key Benefits",
+      "add_to_cart": "Add to Cart",
+      "in_stock": "In Stock",
+      "payment_options": "Payment Options",
+      "indications": "Indications",
+      "ingredients": "Ingredients",
+      "usage": "Usage",
+      "specifications": "Specifications",
+      "reviews": "Reviews",
+      "indications_title": "Usage Areas",
+      "ingredients_title": "Ingredient Information",
+      "usage_title": "Usage Instructions",
+      "specifications_title": "Technical Specifications",
+      "reviews_title": "Customer Reviews",
+      "ingredient": "Ingredient",
+      "function": "Function",
+      "dosage": "Dosage",
+      "frequency": "Usage Frequency",
+      "warnings": "Warnings",
+      "dosage_default": "1 ml for every 5 kg body weight",
+      "frequency_default": "Twice daily with meals",
+      "form": "Form",
+      "weight": "Weight",
+      "shelf_life": "Shelf Life",
+      "storage": "Storage Conditions",
+      "category": "Category",
+      "sku": "Product Code",
+      "total_reviews": "total reviews",
+      "related_products": "Related Products",
+      "view_details": "View Details",
+      "faq_title": "Frequently Asked Questions",
+      "faq_side_effects": "Are there any side effects?",
+      "faq_effect_time": "How long does it take to show effect?",
+      "faq_cats_dogs": "Is it the same for cats and dogs?",
+      "faq_side_effects_answer": "Since this product consists of natural ingredients, the risk of side effects is very low. However, consult your veterinarian in case of any allergic reaction.",
+      "faq_effect_time_answer": "The effect of the product usually starts to be seen within 1-2 weeks. Regular use is important for full effect.",
+      "faq_cats_dogs_answer": "This product is suitable for both cats and dogs. Dosage information varies according to the animal's weight.",
+      "added_to_cart": "Product added to cart!"
+    },
+    "products": {
+      "cartilagoflex": {
+        "name": "Cartilagoflex - Joint Health Support",
+        "description": "Natural formula supporting joint health"
+      },
+      "canivir": {
+        "name": "Canivir - Immune System Support",
+        "description": "Immune system booster for dogs"
+      },
+      "felovir": {
+        "name": "Felovir - Immune System Support",
+        "description": "Immune system booster for cats"
+      },
+      "petimmun": {
+        "name": "Petimmun - Immune System Support",
+        "description": "Immune system booster for pets"
+      },
+      "ease-off": {
+        "name": "Ease Off - Calming",
+        "description": "Natural calming for pets"
+      },
+      "bladder-control": {
+        "name": "Bladder Control - Bladder Control",
+        "description": "Special formula for bladder control"
+      },
+      "uticare": {
+        "name": "Uticare - Urinary System Support",
+        "description": "Product supporting urinary system health"
+      }
     },
     "category": {
       "subcategories": "subcategories",
@@ -365,9 +511,11 @@
   },
   "de": {
     "nav": {
+      "home": "Startseite",
       "categories": "Kategorien",
       "indications": "Indikationen",
       "articles": "Artikel",
+      "user_submissions": "Von Ihnen",
       "about": "Über uns",
       "contact": "Kontakt",
       "dog_nutrition": "Hundeernährung",
@@ -461,6 +609,77 @@
       "cat_products_showing": "Katzenprodukte werden angezeigt",
       "dog_products_showing": "Hundeprodukte werden angezeigt",
       "categories_count": "Kategorien"
+    },
+    "product": {
+      "reviews_count": "Bewertungen",
+      "key_benefits": "Hauptvorteile",
+      "add_to_cart": "In den Warenkorb",
+      "in_stock": "Auf Lager",
+      "payment_options": "Zahlungsoptionen",
+      "indications": "Indikationen",
+      "ingredients": "Inhaltsstoffe",
+      "usage": "Anwendung",
+      "specifications": "Spezifikationen",
+      "reviews": "Bewertungen",
+      "indications_title": "Anwendungsbereiche",
+      "ingredients_title": "Inhaltsstoffinformationen",
+      "usage_title": "Anweisungen zur Anwendung",
+      "specifications_title": "Technische Spezifikationen",
+      "reviews_title": "Kundenbewertungen",
+      "ingredient": "Inhaltsstoff",
+      "function": "Funktion",
+      "dosage": "Dosierung",
+      "frequency": "Anwendungshäufigkeit",
+      "warnings": "Warnungen",
+      "dosage_default": "1 ml für jedes 5 kg Körpergewicht",
+      "frequency_default": "Zweimal täglich mit den Mahlzeiten",
+      "form": "Form",
+      "weight": "Gewicht",
+      "shelf_life": "Haltbarkeit",
+      "storage": "Lagerbedingungen",
+      "category": "Kategorie",
+      "sku": "Produktcode",
+      "total_reviews": "Gesamtbewertungen",
+      "related_products": "Verwandte Produkte",
+      "view_details": "Details anzeigen",
+      "faq_title": "Häufig gestellte Fragen",
+      "faq_side_effects": "Gibt es Nebenwirkungen?",
+      "faq_effect_time": "Wie lange dauert es, bis die Wirkung eintritt?",
+      "faq_cats_dogs": "Ist es dasselbe für Katzen und Hunde?",
+      "faq_side_effects_answer": "Da dieses Produkt aus natürlichen Inhaltsstoffen besteht, ist das Risiko von Nebenwirkungen sehr gering. Konsultieren Sie jedoch Ihren Tierarzt bei allergischen Reaktionen.",
+      "faq_effect_time_answer": "Die Wirkung des Produkts beginnt normalerweise innerhalb von 1-2 Wochen sichtbar zu werden. Regelmäßige Anwendung ist für die volle Wirkung wichtig.",
+      "faq_cats_dogs_answer": "Dieses Produkt ist sowohl für Katzen als auch für Hunde geeignet. Die Dosierungsinformationen variieren je nach Gewicht des Tieres.",
+      "added_to_cart": "Produkt zum Warenkorb hinzugefügt!"
+    },
+    "products": {
+      "cartilagoflex": {
+        "name": "Cartilagoflex - Gelenkgesundheit Unterstützung",
+        "description": "Natürliche Formel zur Unterstützung der Gelenkgesundheit"
+      },
+      "canivir": {
+        "name": "Canivir - Immunsystem Unterstützung",
+        "description": "Immunsystem-Booster für Hunde"
+      },
+      "felovir": {
+        "name": "Felovir - Immunsystem Unterstützung",
+        "description": "Immunsystem-Booster für Katzen"
+      },
+      "petimmun": {
+        "name": "Petimmun - Immunsystem Unterstützung",
+        "description": "Immunsystem-Booster für Haustiere"
+      },
+      "ease-off": {
+        "name": "Ease Off - Beruhigung",
+        "description": "Natürliche Beruhigung für Haustiere"
+      },
+      "bladder-control": {
+        "name": "Bladder Control - Blasenkontrolle",
+        "description": "Spezielle Formel für Blasenkontrolle"
+      },
+      "uticare": {
+        "name": "Uticare - Harnsystem Unterstützung",
+        "description": "Produkt zur Unterstützung der Harnsystemgesundheit"
+      }
     },
     "category": {
       "subcategories": "Unterkategorien",

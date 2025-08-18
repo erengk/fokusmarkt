@@ -20,6 +20,10 @@ $path = explode('?', $path)[0];
 
 // Route to appropriate page
 switch ($path) {
+    case 'language':
+        include __DIR__ . '/pages/language.php';
+        break;
+        
     case '':
     case 'home':
         include __DIR__ . '/pages/home.php';
@@ -27,6 +31,35 @@ switch ($path) {
         
     case 'category':
         include __DIR__ . '/pages/category.php';
+        break;
+        
+    case 'product':
+        include __DIR__ . '/pages/product.php';
+        break;
+        
+    // Ürün sayfaları için routing
+    case 'o2-care':
+    case 'canivir':
+    case 'felovir':
+    case 'petimmun':
+    case 'ease-off':
+    case 'bladder-control':
+    case 'uticare':
+    case 'renacure':
+    case 'salmonoil':
+    case 'retino-a':
+    case 'phytospan':
+    case 'multivit':
+    case 'm-b-care':
+    case 'dermacumin':
+    case 'derma-zn':
+    case 'derma-hairball':
+    case 'dental-care':
+    case 'coprophagia':
+    case 'cartilagoflex':
+        // Ürün slug'ını al ve product.php'ye yönlendir
+        $productSlug = $path;
+        include __DIR__ . '/pages/product.php';
         break;
         
     case 'dogs':

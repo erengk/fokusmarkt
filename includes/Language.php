@@ -29,7 +29,7 @@ class Language {
             if (in_array($browserLang, $this->supportedLanguages)) {
                 $this->currentLang = $browserLang;
             } else {
-                $this->currentLang = DEFAULT_LANG;
+                $this->currentLang = defined('DEFAULT_LANG') ? DEFAULT_LANG : 'tr';
             }
             $_SESSION['lang'] = $this->currentLang;
         }
@@ -96,6 +96,17 @@ class Language {
             'de' => '🇩🇪'
         ];
         return $flags[$code] ?? '';
+    }
+    
+    // Debug metodu
+    public function debug($key = null) {
+        if ($key) {
+            return $this->get($key);
+        }
+        return [
+            'currentLang' => $this->currentLang,
+            'translations' => $this->translations
+        ];
     }
 }
 ?>

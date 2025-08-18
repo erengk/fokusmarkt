@@ -1,4 +1,7 @@
 <?php
+require_once __DIR__ . '/Language.php';
+require_once __DIR__ . '/Database.php';
+
 class Product {
     private static $instance = null;
     private $config = [];
@@ -164,7 +167,7 @@ class Product {
     public function getProductImagesBySlug($productSlug) {
         $images = [];
         
-        // Ürün slug'ını dosya yoluna çevir (örn: dental-care -> dental_care)
+        // Ürün slug'ını dosya yoluna çevir (örn: dental-care -> dental_care, o2-care -> o2_care)
         $productPath = str_replace('-', '_', $productSlug);
         $basePath = "assets/products/{$this->currentLang}/{$productPath}";
         
@@ -177,16 +180,14 @@ class Product {
                 $files = scandir($fullPath);
                 foreach ($files as $file) {
                     if (in_array(pathinfo($file, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
-                        // Sadece ürün görsellerini al, rehber dosyalarını alma
-                        if (!str_contains(strtolower($file), 'rehber')) {
-                            $images[] = [
-                                'filename' => $file,
-                                'path' => $fullPath . '/' . $file,
-                                'url' => '/' . $fullPath . '/' . $file,
-                                'product' => $productSlug,
-                                'form' => $subFolder
-                            ];
-                        }
+                        // Tüm görselleri al (rehber dahil)
+                        $images[] = [
+                            'filename' => $file,
+                            'path' => $fullPath . '/' . $file,
+                            'url' => '/' . $fullPath . '/' . $file,
+                            'product' => $productSlug,
+                            'form' => $subFolder
+                        ];
                     }
                 }
             }
@@ -227,7 +228,8 @@ class Product {
             }
         }
         
-        // Maksimum 5 görsel göster (performans için)
+        // Görselleri karıştır ve maksimum 5 görsel göster (performans için)
+        shuffle($allImages);
         return array_slice($allImages, 0, 5);
     }
     
@@ -276,25 +278,33 @@ class Product {
         return $product;
     }
     
-    // Kategoriye göre ürünleri getir
+    // Kategoriye göre ürünleri getir (dosya sisteminden)
     public function getProductsByCategory($category) {
-        $products = $this->db->fetchAll("
-            SELECT p.id, p.name, p.slug, p.description, p.short_description
-            FROM products p
-            JOIN product_categories pc ON p.id = pc.product_id
-            JOIN categories c ON pc.category_id = c.id
-            WHERE c.slug = ? AND p.is_active = 1
-            ORDER BY p.sort_order, p.name
-        ", [$category]);
+        // Kategori-ürün eşleştirmesi (verilen listeye göre)
+        $categoryProductMap = [
+            'eklem-sagligi' => ['cartilagoflex'],
+            'immunoterapi' => ['canivir', 'felovir', 'petimmun'],
+            'sakinlestirici' => ['ease-off'],
+            'uriner-sistem' => ['bladder-control', 'uticare'],
+            'tuy-ve-deri-sagligi' => ['dermacumin', 'retino-a', 'derma-zn', 'derma-hairball', 'salmonoil'],
+            'bobrek-sagligi' => ['renacure'],
+            'sindirim-sistemi' => ['canivir', 'coprophagia', 'petimmun', 'derma-hairball'],
+            'solunum-sistemi' => ['o2-care', 'phytospan'],
+            'kemik-sagligi' => ['multivit'],
+            'gebelik-ve-emzirme-sagligi' => ['m-b-care'],
+            'diski-yeme' => ['coprophagia'],
+            'soguk-alginligi' => ['phytospan', 'petimmun', 'o2-care'],
+            'agiz-ve-dis-sagligi' => ['dental-care']
+        ];
         
+        $productSlugs = $categoryProductMap[$category] ?? [];
         $result = [];
-        foreach ($products as $product) {
-            $result[$product['slug']] = [
-                'id' => $product['id'],
-                'name' => $product['name'],
-                'slug' => $product['slug'],
-                'description' => $product['description'],
-                'short_description' => $product['short_description']
+        
+        foreach ($productSlugs as $productSlug) {
+            $result[$productSlug] = [
+                'name' => ucwords(str_replace(['-', '_'], ' ', $productSlug)),
+                'slug' => $productSlug,
+                'description' => 'Ürün açıklaması'
             ];
         }
         
@@ -364,29 +374,51 @@ class Product {
         return $this->currentLang;
     }
     
-    // Güncellenmiş kategori bilgilerini getir
+    // Güncellenmiş kategori bilgilerini getir (dosya sisteminden)
     public function getAllCategoriesWithInfo() {
         $categories = [];
-        $dbCategories = $this->db->fetchAll("
-            SELECT c.slug, c.name, c.description, c.sort_order,
-                   COUNT(pc.product_id) as product_count
-            FROM categories c
-            LEFT JOIN product_categories pc ON c.id = pc.category_id
-            WHERE c.is_active = 1
-            GROUP BY c.id, c.slug, c.name, c.description, c.sort_order
-            ORDER BY c.sort_order
-        ");
         
-        foreach ($dbCategories as $category) {
-            $categories[$category['slug']] = [
-                'name' => $category['name'],
-                'description' => $category['description'],
+        // Kategori listesi (verilen listeye göre)
+        $categoryList = [
+            'eklem-sagligi' => ['name' => 'Eklem Sağlığı', 'description' => 'Eklem sağlığı için ürünler', 'sort_order' => 1],
+            'immunoterapi' => ['name' => 'İmmunoterapi', 'description' => 'Bağışıklık sistemi için ürünler', 'sort_order' => 2],
+            'sakinlestirici' => ['name' => 'Sakinleştirici', 'description' => 'Sakinleştirici ürünler', 'sort_order' => 3],
+            'uriner-sistem' => ['name' => 'Üriner Sistem', 'description' => 'Üriner sistem sağlığı için ürünler', 'sort_order' => 4],
+            'tuy-ve-deri-sagligi' => ['name' => 'Tüy ve Deri Sağlığı', 'description' => 'Tüy ve deri sağlığı için ürünler', 'sort_order' => 5],
+            'bobrek-sagligi' => ['name' => 'Böbrek Sağlığı', 'description' => 'Böbrek sağlığı için ürünler', 'sort_order' => 6],
+            'sindirim-sistemi' => ['name' => 'Sindirim Sistemi', 'description' => 'Sindirim sistemi sağlığı için ürünler', 'sort_order' => 7],
+            'solunum-sistemi' => ['name' => 'Solunum Sistemi', 'description' => 'Solunum sistemi sağlığı için ürünler', 'sort_order' => 8],
+            'kemik-sagligi' => ['name' => 'Kemik Sağlığı', 'description' => 'Kemik sağlığı için ürünler', 'sort_order' => 9],
+            'gebelik-ve-emzirme-sagligi' => ['name' => 'Gebelik ve Emzirme Sağlığı', 'description' => 'Gebelik ve emzirme dönemi için ürünler', 'sort_order' => 10],
+            'diski-yeme' => ['name' => 'Dışkı Yeme', 'description' => 'Dışkı yeme davranışı için ürünler', 'sort_order' => 11],
+            'soguk-alginligi' => ['name' => 'Soğuk Algınlığı', 'description' => 'Soğuk algınlığı için ürünler', 'sort_order' => 12],
+            'agiz-ve-dis-sagligi' => ['name' => 'Ağız ve Diş Sağlığı', 'description' => 'Ağız ve diş sağlığı için ürünler', 'sort_order' => 13]
+        ];
+        
+        foreach ($categoryList as $slug => $info) {
+            // Kategori için ürün sayısını hesapla
+            $products = $this->getProductsByCategory($slug);
+            $productCount = count($products);
+            
+            $categories[$slug] = [
+                'name' => $info['name'],
+                'description' => $info['description'],
                 'subcategories' => [], // Şimdilik boş
-                'url' => "/kategoriler/{$category['slug']}",
-                'image_count' => $category['product_count'],
-                'product_count' => $category['product_count']
+                'url' => "/kategoriler/{$slug}",
+                'image_count' => $productCount,
+                'product_count' => $productCount
             ];
         }
+        
+        // Sort order'a göre sırala
+        $sortedCategories = [];
+        foreach ($categoryList as $slug => $info) {
+            if (isset($categories[$slug])) {
+                $sortedCategories[$slug] = $categories[$slug];
+            }
+        }
+        
+        return $sortedCategories;
         
         return $categories;
     }
@@ -471,6 +503,156 @@ class Product {
         }
         
         return $species;
+    }
+    
+    public function getProductBySlug($productSlug) {
+        // Ürün slug'ını dosya sistemindeki formata çevir
+        $productPath = str_replace('-', '_', $productSlug);
+        
+        // Dil paketinden çevirileri uygula
+        $lang = Language::getInstance();
+        
+        // Ürün ismi için çeviri dene
+        $translatedName = $lang->get("products.{$productSlug}.name");
+        if ($translatedName && $translatedName !== "products.{$productSlug}.name") {
+            $productName = $translatedName;
+        } else {
+            // Çeviri yoksa slug'dan ürün ismi oluştur
+            $productName = ucwords(str_replace(['-', '_'], ' ', $productSlug));
+        }
+        
+        // Ürün açıklaması için çeviri dene
+        $translatedDesc = $lang->get("products.{$productSlug}.description");
+        if ($translatedDesc && $translatedDesc !== "products.{$productSlug}.description") {
+            $productDesc = $translatedDesc;
+        } else {
+            $productDesc = "Bu ürün evcil hayvanlarınızın sağlığı için özel olarak formüle edilmiştir.";
+        }
+        
+        // Kategori bilgisini belirle (ürün slug'ına göre)
+        $categoryMap = [
+            'cartilagoflex' => 'eklem-sagligi',
+            'canivir' => 'immunoterapi',
+            'felovir' => 'immunoterapi',
+            'petimmun' => 'immunoterapi',
+            'ease-off' => 'sakinlestirici',
+            'bladder-control' => 'uriner-sistem',
+            'uticare' => 'uriner-sistem',
+            'renacure' => 'bobrek-sagligi',
+            'salmonoil' => 'tuy-ve-deri-sagligi',
+            'retino-a' => 'tuy-ve-deri-sagligi',
+            'phytospan' => 'solunum-sistemi',
+            'multivit' => 'eklem-sagligi',
+            'm-b-care' => 'gebelik-ve-emzirme-sagligi',
+            'dermacumin' => 'tuy-ve-deri-sagligi',
+            'derma-zn' => 'tuy-ve-deri-sagligi',
+            'derma-hairball' => 'tuy-ve-deri-sagligi',
+            'dental-care' => 'agiz-ve-dis-sagligi',
+            'coprophagia' => 'diski-yeme',
+            'o2-care' => 'solunum-sistemi'
+        ];
+        
+        $category = $categoryMap[$productSlug] ?? 'genel';
+        
+        // Varsayılan fiyat ve diğer bilgiler
+        $product = [
+            'name' => $productName,
+            'description' => $productDesc,
+            'price' => 150.00,
+            'old_price' => 180.00,
+            'slug' => $productSlug,
+            'sku' => strtoupper($productSlug),
+            'weight' => '100ml',
+            'form' => 'Tablet',
+            'shelf_life' => '24 ay',
+            'storage' => 'Serin ve kuru yerde saklayınız',
+            'dosage' => 'Her 5 kg vücut ağırlığı için 1 ml',
+            'frequency' => 'Günde 2 kez, yemekle birlikte',
+            'category' => $category,
+            'benefits' => [
+                'Doğal içerikler',
+                'Veteriner onaylı',
+                'Kolay kullanım',
+                'Etkili sonuçlar'
+            ],
+            'indications' => [
+                ['name' => 'Genel sağlık desteği', 'description' => 'Evcil hayvanlarınızın genel sağlığını destekler']
+            ],
+            'warnings' => [
+                'Veteriner kontrolünde kullanınız',
+                'Çocukların ulaşamayacağı yerde saklayınız'
+            ],
+            'ingredients' => [
+                ['name' => 'Vitamin C', 'function' => 'Bağışıklık sistemi desteği'],
+                ['name' => 'Vitamin E', 'function' => 'Antioksidan etki'],
+                ['name' => 'Omega-3', 'function' => 'Cilt ve tüy sağlığı']
+            ]
+        ];
+        
+        return $product;
+    }
+    
+
+    
+    public function getProductWarnings($productSlug) {
+        $warnings = $this->db->fetchAll("
+            SELECT w.warning_text
+            FROM product_warnings w
+            JOIN products p ON w.product_id = p.id
+            WHERE p.slug = ? AND w.is_active = 1
+            ORDER BY w.sort_order
+        ", [$productSlug]);
+        
+        $result = [];
+        foreach ($warnings as $warning) {
+            $result[] = $warning['warning_text'];
+        }
+        
+        return $result;
+    }
+    
+    public function getProductBenefits($productSlug) {
+        $benefits = $this->db->fetchAll("
+            SELECT b.benefit_text
+            FROM product_benefits b
+            JOIN products p ON b.product_id = p.id
+            WHERE p.slug = ? AND b.is_active = 1
+            ORDER BY b.sort_order
+        ", [$productSlug]);
+        
+        $result = [];
+        foreach ($benefits as $benefit) {
+            $result[] = $benefit['benefit_text'];
+        }
+        
+        return $result;
+    }
+    
+    public function getProductIngredients($productSlug) {
+        $ingredients = $this->db->fetchAll("
+            SELECT i.ingredient_name as name, i.function_description as function
+            FROM product_ingredients i
+            JOIN products p ON i.product_id = p.id
+            WHERE p.slug = ? AND i.is_active = 1
+            ORDER BY i.sort_order
+        ", [$productSlug]);
+        
+        return $ingredients;
+    }
+    
+    public function getRelatedProducts($productSlug, $categorySlug, $limit = 4) {
+        $related = $this->db->fetchAll("
+            SELECT p.id, p.name, p.price, p.slug, pi.image_url as image
+            FROM products p
+            JOIN product_categories pc ON p.id = pc.product_id
+            JOIN categories c ON pc.category_id = c.id
+            LEFT JOIN product_images pi ON p.id = pi.product_id AND pi.sort_order = 1
+            WHERE c.slug = ? AND p.slug != ? AND p.is_active = 1
+            ORDER BY RAND()
+            LIMIT ?
+        ", [$categorySlug, $productSlug, $limit]);
+        
+        return $related;
     }
 }
 ?>

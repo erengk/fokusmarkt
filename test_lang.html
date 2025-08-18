@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dil Seçimi Test</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .test-container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .language-selector {
+            position: relative;
+            display: inline-block;
+        }
+        .lang-btn {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            color: #495057;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        .lang-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 8px 0;
+            min-width: 180px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: all 0.2s ease;
+            z-index: 9999;
+        }
+        .lang-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 16px;
+            color: #495057;
+            text-decoration: none;
+            transition: background 0.2s ease;
+            font-size: 14px;
+        }
+        .lang-option:hover {
+            background: #f8f9fa;
+        }
+        .lang-flag {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Dil Seçimi Test Sayfası</h1>
+        
+        <div class="language-selector">
+            <button class="lang-btn" onclick="toggleLanguageMenu()">
+                <i class="fas fa-globe"></i>
+                <span>TR</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="lang-menu" id="langMenu">
+                <a href="javascript:void(0)" onclick="changeLanguage('tr')" class="lang-option">
+                    <span class="lang-flag">🇹🇷</span>
+                    <span class="lang-name">Türkçe</span>
+                </a>
+                <a href="javascript:void(0)" onclick="changeLanguage('en')" class="lang-option">
+                    <span class="lang-flag">🇺🇸</span>
+                    <span class="lang-name">English</span>
+                </a>
+                <a href="javascript:void(0)" onclick="changeLanguage('de')" class="lang-option">
+                    <span class="lang-flag">🇩🇪</span>
+                    <span class="lang-name">Deutsch</span>
+                </a>
+            </div>
+        </div>
+        
+        <p>Dil butonuna tıklayarak menüyü açabilirsiniz.</p>
+    </div>
+
+    <script>
+        function toggleLanguageMenu() {
+            const menu = document.getElementById('langMenu');
+            if (menu) {
+                menu.classList.toggle('active');
+            }
+        }
+        
+        function changeLanguage(langCode) {
+            console.log('Dil değiştiriliyor:', langCode);
+            const langMenu = document.getElementById('langMenu');
+            if (langMenu) {
+                langMenu.classList.remove('active');
+            }
+            
+            // Test için sadece console'a yazdır
+            alert('Dil değiştirildi: ' + langCode);
+        }
+        
+        // Menü dışına tıklandığında kapat
+        document.addEventListener('click', function(e) {
+            const langBtn = document.querySelector('.lang-btn');
+            const langMenu = document.getElementById('langMenu');
+            
+            if (!langBtn.contains(e.target) && !langMenu.contains(e.target)) {
+                langMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

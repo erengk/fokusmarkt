@@ -6,66 +6,39 @@ $categories = $product->getAllCategoriesWithInfo();
 
 <?php include __DIR__ . '/../includes/Header.php'; ?>
 
-<!-- Banner Slider Section -->
-<section class="banner-slider">
-    <div class="slider-container">
-        <div class="slider-wrapper">
-            <div class="slide active">
-                <div class="slide-content">
-                    <div class="slide-text">
-                        <h1><?php echo $lang->get('home.hero_title_1'); ?></h1>
-                        <p><?php echo $lang->get('home.hero_subtitle_1'); ?></p>
-                        <a href="#products" class="cta-button"><?php echo $lang->get('home.hero_cta_1'); ?></a>
-                    </div>
-                    <div class="slide-image">
-                        <video autoplay muted loop class="slide-img">
-                            <source src="/assets/views/<?php echo $lang->getCurrentLang(); ?>/banner_1.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                </div>
+<!-- New Banner Slider Section -->
+<section class="new-banner-slider">
+    <div class="new-slider-container">
+        <div class="new-slider-wrapper">
+            <div class="new-slide active">
+                <video autoplay muted loop class="new-slide-img">
+                    <source src="/assets/views/<?php echo $lang->getCurrentLang(); ?>/banner_1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
             
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-text">
-                        <h1><?php echo $lang->get('home.hero_title_2'); ?></h1>
-                        <p><?php echo $lang->get('home.hero_subtitle_2'); ?></p>
-                        <a href="#products" class="cta-button"><?php echo $lang->get('home.hero_cta_2'); ?></a>
-                    </div>
-                    <div class="slide-image">
-                        <video autoplay muted loop class="slide-img">
-                            <source src="/assets/views/<?php echo $lang->getCurrentLang(); ?>/banner_2.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                </div>
+            <div class="new-slide">
+                <video autoplay muted loop class="new-slide-img">
+                    <source src="/assets/views/<?php echo $lang->getCurrentLang(); ?>/banner_2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
             
-            <div class="slide">
-                <div class="slide-content">
-                    <div class="slide-text">
-                        <h1><?php echo $lang->get('home.hero_title_3'); ?></h1>
-                        <p><?php echo $lang->get('home.hero_subtitle_3'); ?></p>
-                        <a href="#categories" class="cta-button"><?php echo $lang->get('home.hero_cta_3'); ?></a>
-                    </div>
-                    <div class="slide-image">
-                        <img src="/assets/views/<?php echo $lang->getCurrentLang(); ?>/banner_3.png" alt="Quality Products" class="slide-img">
-                    </div>
-                </div>
+            <div class="new-slide">
+                <img src="/assets/views/<?php echo $lang->getCurrentLang(); ?>/banner_3.png" alt="Banner 3" class="new-slide-img">
             </div>
         </div>
         
-        <div class="slider-controls">
-            <button class="slider-btn prev-btn" onclick="changeSlide(-1)">
+        <div class="new-slider-controls">
+            <button class="new-slider-btn prev-btn" onclick="changeNewSlide(-1)">
                 <i class="fas fa-chevron-left"></i>
             </button>
-            <div class="slider-dots">
-                <span class="dot active" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
+            <div class="new-slider-dots">
+                <span class="new-dot active" onclick="currentNewSlide(1)"></span>
+                <span class="new-dot" onclick="currentNewSlide(2)"></span>
+                <span class="new-dot" onclick="currentNewSlide(3)"></span>
             </div>
-            <button class="slider-btn next-btn" onclick="changeSlide(1)">
+            <button class="new-slider-btn next-btn" onclick="changeNewSlide(1)">
                 <i class="fas fa-chevron-right"></i>
             </button>
         </div>
@@ -77,26 +50,42 @@ $categories = $product->getAllCategoriesWithInfo();
     <!-- Pet Types Section -->
     <section class="pet-types-section">
         <div class="container">
-            <h2 class="section-title text-center mb-2"><?php echo $lang->get('home.pet_types_title'); ?></h2>
+    
             
             <div class="pet-types-grid">
                 <?php foreach ($product->getPetTypes() as $petTypeKey => $petTypeName): ?>
                     <div class="pet-type-card">
-                        <div class="pet-type-icon">
-                            <?php
-                            $iconMap = [
-                                'kedi' => '🐱',
-                                'kopek' => '🐕',
-                                'birds' => '🐦',
-                                'fish' => '🐠',
-                                'small_animals' => '🐹'
-                            ];
-                            echo $iconMap[$petTypeKey] ?? '🐾';
-                            ?>
+                        <?php if ($petTypeKey === 'kedi'): ?>
+                            <div class="pet-type-video">
+                                <video autoplay muted loop class="pet-video">
+                                    <source src="/assets/views/<?php echo $lang->getCurrentLang(); ?>/banner_5.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        <?php elseif ($petTypeKey === 'kopek'): ?>
+                            <div class="pet-type-video">
+                                <video autoplay muted loop class="pet-video">
+                                    <source src="/assets/views/<?php echo $lang->getCurrentLang(); ?>/banner_6.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        <?php else: ?>
+                            <div class="pet-type-icon">
+                                <?php
+                                $iconMap = [
+                                    'birds' => '🐦',
+                                    'fish' => '🐠',
+                                    'small_animals' => '🐹'
+                                ];
+                                echo $iconMap[$petTypeKey] ?? '🐾';
+                                ?>
+                            </div>
+                        <?php endif; ?>
+                        <div class="pet-type-content">
+                            <h3><?php echo $lang->get("pet_types.{$petTypeKey}"); ?></h3>
+                            <p><?php echo $lang->get('home.pet_types_subtitle'); ?></p>
+                            <a href="/category?pet_type=<?php echo $petTypeKey; ?>" class="btn btn-secondary"><?php echo $lang->get('home.view_products'); ?></a>
                         </div>
-                        <h3><?php echo $lang->get("pet_types.{$petTypeKey}"); ?></h3>
-                        <p><?php echo $lang->get('home.pet_types_subtitle'); ?></p>
-                        <a href="/category?pet_type=<?php echo $petTypeKey; ?>" class="btn btn-secondary"><?php echo $lang->get('home.view_products'); ?></a>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -279,44 +268,7 @@ function updateFilterStats(filter, visibleCount, totalCount) {
     statsElement.textContent = statsText;
 }
 
-// Banner Slider JavaScript
-let currentSlideIndex = 0;
-const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.dot');
 
-function showSlide(index) {
-    // Hide all slides
-    slides.forEach(slide => slide.classList.remove('active'));
-    dots.forEach(dot => dot.classList.remove('active'));
-    
-    // Show current slide
-    if (slides[index]) {
-        slides[index].classList.add('active');
-        dots[index].classList.add('active');
-    }
-}
-
-function changeSlide(direction) {
-    currentSlideIndex += direction;
-    
-    if (currentSlideIndex >= slides.length) {
-        currentSlideIndex = 0;
-    } else if (currentSlideIndex < 0) {
-        currentSlideIndex = slides.length - 1;
-    }
-    
-    showSlide(currentSlideIndex);
-}
-
-function currentSlide(index) {
-    currentSlideIndex = index - 1;
-    showSlide(currentSlideIndex);
-}
-
-// Auto slide every 5 seconds
-setInterval(() => {
-    changeSlide(1);
-}, 5000);
 </script>
 
 <?php include __DIR__ . '/../includes/Footer.php'; ?>
