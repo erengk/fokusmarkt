@@ -96,7 +96,7 @@ class Product {
         return $this->categoryService->getCategoryImages($categorySlug);
     }
     
-    public function getProductForms() {
+    public function getProductFormTypes() {
         return $this->productFormService->getProductForms();
     }
     
@@ -144,6 +144,18 @@ class Product {
     // Ürün detay metodları - ProductDetailService'e yönlendir
     public function getProductVariants($productSlug) {
         return $this->productDetailService->getProductVariants($productSlug);
+    }
+    
+    public function getProductForms($productSlug) {
+        return $this->productDetailService->getProductForms($productSlug);
+    }
+    
+    public function getProductVariantByForm($productSlug, $formName) {
+        return $this->productDetailService->getProductVariantByForm($productSlug, $formName);
+    }
+    
+    public function getProductImagesByForm($productSlug, $formName = null) {
+        return $this->productDetailService->getProductImagesByForm($productSlug, $formName);
     }
     
     public function getProductCategories($productSlug) {

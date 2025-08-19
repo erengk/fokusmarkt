@@ -358,81 +358,119 @@
     }
   },
   "products": {
-    "DERMACUMIN": {
-      "forms": ["jel"],
-      "categories": ["skin_coat_health"]
-    },
-    "PETIMMUN": {
-      "forms": ["jel", "malt", "tablet"],
-      "categories": ["immunotherapy", "digestive_system", "cold_flu"]
-    },
-    "PHYTOSPAN": {
-      "forms": ["jel", "malt", "tablet"],
-      "categories": ["cold_flu"]
-    },
-    "RETINO-A": {
-      "forms": ["jel"],
-      "categories": ["skin_coat_health"]
+    "O2_CARE": {
+      "forms": ["malt", "tablet"],
+      "categories": ["cold_flu"],
+      "pet_types": ["kedi", "kopek"],
+      "brand": "VSD+"
     },
     "BLADDER_CONTROL": {
-      "forms": ["malt", "tablet"],
-      "categories": ["urinary_system"]
+      "forms": ["malt"],
+      "categories": ["urinary_system"],
+      "pet_types": ["kedi", "kopek"],
+      "brand": "VSD+"
     },
     "CANIVIR": {
       "forms": ["malt", "tablet"],
-      "categories": ["immunotherapy", "digestive_system"]
-    },
-    "CARTILAGOFLEX": {
-      "forms": ["malt", "tablet"],
-      "categories": ["joint_health"]
-    },
-    "DERMA_ZN": {
-      "forms": ["malt", "tablet"],
-      "categories": ["skin_coat_health"]
-    },
-    "EASE_OFF": {
-      "forms": ["malt", "tablet"],
-      "categories": ["calming"]
-    },
-    "FELOVIR": {
-      "forms": ["malt"],
-      "categories": ["immunotherapy"]
-    },
-    "COPROPHAGIA": {
-      "forms": ["malt", "tablet"],
-      "categories": ["digestive_system", "coprophagia"]
-    },
-    "MB_CARE": {
-      "forms": ["malt", "tablet"],
-      "categories": ["pregnancy_nursing"]
-    },
-    "MULTIVIT": {
-      "forms": ["malt", "tablet"],
-      "categories": ["bone_health"]
-    },
-    "O2_CARE": {
-      "forms": ["malt", "tablet"],
-      "categories": ["cold_flu"]
+      "categories": ["immunotherapy", "digestive_system"],
+      "pet_types": ["kedi", "kopek"],
+      "brand": "VSD+"
     },
     "RENACURE": {
-      "forms": ["malt", "tablet"],
-      "categories": ["kidney_health"]
+      "forms": ["malt"],
+      "categories": ["kidney_health"],
+      "pet_types": ["kedi", "kopek"],
+      "brand": "VSD+"
     },
     "UTICARE": {
       "forms": ["malt", "tablet"],
-      "categories": ["urinary_system"]
+      "categories": ["urinary_system"],
+      "pet_types": ["kedi", "kopek"],
+      "brand": "VSD+"
     },
-    "DERMA_HAIRBALL": {
+    "FELOVIR": {
+      "forms": ["malt"],
+      "categories": ["immunotherapy"],
+      "pet_types": ["kedi", "kopek"],
+      "brand": "VSD+"
+    },
+    "DERMACUMIN": {
+      "forms": ["jel"],
+      "categories": ["skin_coat_health"],
+      "pet_types": ["kedi", "kopek"],
+      "brand": "VSD+"
+    },
+    "RETINO_A": {
+      "forms": ["jel"],
+      "categories": ["skin_coat_health"],
+      "pet_types": ["kedi", "kopek"],
+      "brand": "VSD+"
+    },
+    "MULTIVIT": {
+      "forms": ["malt", "tablet"],
+      "categories": ["bone_health"],
+      "pet_types": ["kedi", "kopek"],
+      "brand": "VSD"
+    },
+    "MB_CARE": {
+      "forms": ["malt", "tablet"],
+      "categories": ["pregnancy_nursing"],
+      "pet_types": ["kedi", "kopek"],
+      "brand": "VSD"
+    },
+    "EASE_OFF": {
+      "forms": ["malt", "tablet"],
+      "categories": ["calming"],
+      "pet_types": ["kedi", "kopek"],
+      "brand": "VSD"
+    },
+    "CARTILAGOFLEX": {
       "forms": ["tablet"],
-      "categories": ["skin_coat_health", "digestive_system"]
+      "categories": ["joint_health"],
+      "pet_types": ["kedi", "kopek"],
+      "brand": "VSD"
+    },
+    "DERMA_ZN": {
+      "forms": ["malt", "tablet"],
+      "categories": ["skin_coat_health"],
+      "pet_types": ["kedi", "kopek"],
+      "brand": "VSD"
+    },
+    "COPROPHAGIA": {
+      "forms": ["malt", "tablet"],
+      "categories": ["digestive_system", "coprophagia"],
+      "pet_types": ["kedi", "kopek"],
+      "brand": "VSD"
+    },
+    "PETIMMUN": {
+      "forms": ["malt"],
+      "categories": ["immunotherapy", "digestive_system", "cold_flu"],
+      "pet_types": ["kedi", "kopek"],
+      "brand": "VSD+"
+    },
+    "PHYTOSPAN": {
+      "forms": ["malt", "tablet", "jel"],
+      "categories": ["cold_flu"],
+      "pet_types": ["kedi", "kopek"],
+      "brand": "VSD+"
     },
     "DENTAL_CARE": {
       "forms": ["tablet"],
-      "categories": ["dental_health"]
+      "categories": ["dental_health"],
+      "pet_types": ["kedi", "kopek"],
+      "brand": "VSD+"
     },
     "SALMONOIL": {
       "forms": ["tablet"],
-      "categories": ["skin_coat_health"]
+      "categories": ["skin_coat_health"],
+      "pet_types": ["kedi", "kopek"],
+      "brand": "VSD+"
+    },
+    "DERMA_HAIRBALL": {
+      "forms": ["tablet"],
+      "categories": ["skin_coat_health", "digestive_system"],
+      "pet_types": ["kedi", "kopek"],
+      "brand": "VSD+"
     }
   }
 }

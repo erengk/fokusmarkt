@@ -18,6 +18,19 @@ $path = trim($path, '/');
 // Remove query string
 $path = explode('?', $path)[0];
 
+// Check for language prefix (en/, de/, tr/)
+$language = 'tr'; // default language
+$pathParts = explode('/', $path);
+
+if (in_array($pathParts[0], ['en', 'de', 'tr'])) {
+    $language = $pathParts[0];
+    $path = implode('/', array_slice($pathParts, 1));
+    
+    // Set language
+    $lang = Language::getInstance();
+    $lang->setLanguage($language);
+}
+
 // Route to appropriate page
 switch ($path) {
     case 'language':

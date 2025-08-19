@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Görsel Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-image {
+            max-width: 300px;
+            max-height: 300px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            margin: 10px;
+            display: inline-block;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Görsel Test Sayfası</h1>
+    
+    <h2>Phytospan Jel Görselleri:</h2>
+    <div>
+        <img src="/assets/products/tr/phytospan/jel/Phytospan_Jel_01.jpg" 
+             alt="Phytospan Jel 01" 
+             class="test-image"
+             onload="this.nextElementSibling.textContent='✅ Yüklendi'"
+             onerror="this.nextElementSibling.textContent='❌ Yüklenemedi'">
+        <div class="success">Yükleniyor...</div>
+    </div>
+    
+    <div>
+        <img src="/assets/products/tr/phytospan/jel/Phytospan_Jel_02.jpg" 
+             alt="Phytospan Jel 02" 
+             class="test-image"
+             onload="this.nextElementSibling.textContent='✅ Yüklendi'"
+             onerror="this.nextElementSibling.textContent='❌ Yüklenemedi'">
+        <div class="success">Yükleniyor...</div>
+    </div>
+    
+    <div>
+        <img src="/assets/products/tr/phytospan/jel/Phytospan_Rehber.jpg" 
+             alt="Phytospan Rehber" 
+             class="test-image"
+             onload="this.nextElementSibling.textContent='✅ Yüklendi'"
+             onerror="this.nextElementSibling.textContent='❌ Yüklenemedi'">
+        <div class="success">Yükleniyor...</div>
+    </div>
+    
+    <h2>Phytospan Malt Görselleri:</h2>
+    <div>
+        <img src="/assets/products/tr/phytospan/malt/Phytospan_Malt_01.jpg" 
+             alt="Phytospan Malt 01" 
+             class="test-image"
+             onload="this.nextElementSibling.textContent='✅ Yüklendi'"
+             onerror="this.nextElementSibling.textContent='❌ Yüklenemedi'">
+        <div class="success">Yükleniyor...</div>
+    </div>
+    
+    <div>
+        <img src="/assets/products/tr/phytospan/malt/Phytospan_Malt_02.jpg" 
+             alt="Phytospan Malt 02" 
+             class="test-image"
+             onload="this.nextElementSibling.textContent='✅ Yüklendi'"
+             onerror="this.nextElementSibling.textContent='❌ Yüklenemedi'">
+        <div class="success">Yükleniyor...</div>
+    </div>
+    
+    <h2>Phytospan Tablet Görselleri:</h2>
+    <div>
+        <img src="/assets/products/tr/phytospan/tablet/Phytospan_Tablet_01.jpg" 
+             alt="Phytospan Tablet 01" 
+             class="test-image"
+             onload="this.nextElementSibling.textContent='✅ Yüklendi'"
+             onerror="this.nextElementSibling.textContent='❌ Yüklenemedi'">
+        <div class="success">Yükleniyor...</div>
+    </div>
+    
+    <div>
+        <img src="/assets/products/tr/phytospan/tablet/Phytospan_Tablet_02.jpg" 
+             alt="Phytospan Tablet 02" 
+             class="test-image"
+             onload="this.nextElementSibling.textContent='✅ Yüklendi'"
+             onerror="this.nextElementSibling.textContent='❌ Yüklenemedi'">
+        <div class="success">Yükleniyor...</div>
+    </div>
+</body>
+</html>

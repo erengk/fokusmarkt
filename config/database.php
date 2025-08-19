@@ -8,7 +8,7 @@ define('DB_PASS', '');
 define('DB_CHARSET', 'utf8mb4');
 
 // SQLite Database Path
-define('DB_PATH', __DIR__ . '/../database/fokusmarkt.sqlite');
+define('DB_PATH', __DIR__ . '/../database/fokusmarkt.db');
 
 // Site Configuration
 define('SITE_NAME', 'Fokus Markt');

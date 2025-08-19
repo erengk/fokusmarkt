@@ -103,8 +103,16 @@
     "product": {
       "reviews_count": "değerlendirme",
       "key_benefits": "Temel Faydalar",
+      "select_form": "Form Seçiniz",
       "add_to_cart": "Sepete Ekle",
       "in_stock": "Stokta Mevcut",
+      "out_of_stock": "Stokta Yok",
+      "stock_available": "Stokta var",
+      "stock_unavailable": "Stokta yok",
+      "stock_quantity": "adet",
+      "stock_status_available": "Stokta var ({quantity} adet)",
+      "stock_status_unavailable": "Stokta yok",
+      "rating_text": "4.8/5",
       "payment_options": "Ödeme Seçenekleri",
       "indications": "Endikasyonlar",
       "ingredients": "İçerik",
@@ -139,7 +147,10 @@
       "faq_side_effects_answer": "Bu ürün doğal bileşenlerden oluştuğu için yan etki riski çok düşüktür. Ancak herhangi bir alerjik reaksiyon durumunda veterinerinize danışınız.",
       "faq_effect_time_answer": "Ürünün etkisi genellikle 1-2 hafta içinde görülmeye başlar. Tam etki için düzenli kullanım önemlidir.",
       "faq_cats_dogs_answer": "Bu ürün hem kedi hem de köpekler için uygundur. Dozaj bilgileri hayvanın ağırlığına göre değişmektedir.",
-      "added_to_cart": "Ürün sepete eklendi!"
+      "added_to_cart": "Ürün sepete eklendi!",
+      "form_jel": "100ml jel",
+      "form_malt": "30ml malt",
+      "form_tablet": "60 tablet"
     },
     "products": {
       "cartilagoflex": {
@@ -358,8 +369,16 @@
     "product": {
       "reviews_count": "reviews",
       "key_benefits": "Key Benefits",
+      "select_form": "Select Form",
       "add_to_cart": "Add to Cart",
       "in_stock": "In Stock",
+      "out_of_stock": "Out of Stock",
+      "stock_available": "In Stock",
+      "stock_unavailable": "Out of Stock",
+      "stock_quantity": "pcs",
+      "stock_status_available": "In Stock ({quantity} pcs)",
+      "stock_status_unavailable": "Out of Stock",
+      "rating_text": "4.8/5",
       "payment_options": "Payment Options",
       "indications": "Indications",
       "ingredients": "Ingredients",
@@ -394,7 +413,10 @@
       "faq_side_effects_answer": "Since this product consists of natural ingredients, the risk of side effects is very low. However, consult your veterinarian in case of any allergic reaction.",
       "faq_effect_time_answer": "The effect of the product usually starts to be seen within 1-2 weeks. Regular use is important for full effect.",
       "faq_cats_dogs_answer": "This product is suitable for both cats and dogs. Dosage information varies according to the animal's weight.",
-      "added_to_cart": "Product added to cart!"
+      "added_to_cart": "Product added to cart!",
+      "form_jel": "100ml gel",
+      "form_malt": "30ml malt",
+      "form_tablet": "60 tablets"
     },
     "products": {
       "cartilagoflex": {
@@ -613,8 +635,16 @@
     "product": {
       "reviews_count": "Bewertungen",
       "key_benefits": "Hauptvorteile",
+      "select_form": "Form Selektieren",
       "add_to_cart": "In den Warenkorb",
       "in_stock": "Auf Lager",
+      "out_of_stock": "Ausverkauft",
+      "stock_available": "Auf Lager",
+      "stock_unavailable": "Ausverkauft",
+      "stock_quantity": "Stück",
+      "stock_status_available": "Auf Lager ({quantity} Stück)",
+      "stock_status_unavailable": "Ausverkauft",
+      "rating_text": "4.8/5",
       "payment_options": "Zahlungsoptionen",
       "indications": "Indikationen",
       "ingredients": "Inhaltsstoffe",
@@ -649,7 +679,10 @@
       "faq_side_effects_answer": "Da dieses Produkt aus natürlichen Inhaltsstoffen besteht, ist das Risiko von Nebenwirkungen sehr gering. Konsultieren Sie jedoch Ihren Tierarzt bei allergischen Reaktionen.",
       "faq_effect_time_answer": "Die Wirkung des Produkts beginnt normalerweise innerhalb von 1-2 Wochen sichtbar zu werden. Regelmäßige Anwendung ist für die volle Wirkung wichtig.",
       "faq_cats_dogs_answer": "Dieses Produkt ist sowohl für Katzen als auch für Hunde geeignet. Die Dosierungsinformationen variieren je nach Gewicht des Tieres.",
-      "added_to_cart": "Produkt zum Warenkorb hinzugefügt!"
+      "added_to_cart": "Produkt zum Warenkorb hinzugefügt!",
+      "form_jel": "100ml Gel",
+      "form_malt": "30ml Malz",
+      "form_tablet": "60 Tabletten"
     },
     "products": {
       "cartilagoflex": {

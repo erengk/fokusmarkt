@@ -435,3 +435,85 @@
     }, 250));
     
 })();
+
+// Categories Dropdown Menu Control
+document.addEventListener('DOMContentLoaded', function() {
+    const categoriesLink = document.querySelector('.nav-link[href="/kategoriler"]');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+    
+    if (categoriesLink && dropdownMenu) {
+        let isMenuOpen = false;
+        let timeoutId = null;
+        
+        // Kategoriler linkine hover yapıldığında menüyü aç
+        categoriesLink.addEventListener('mouseenter', function() {
+            clearTimeout(timeoutId);
+            dropdownMenu.style.opacity = '1';
+            dropdownMenu.style.visibility = 'visible';
+            dropdownMenu.style.transform = 'translateX(-50%) translateY(0)';
+            isMenuOpen = true;
+        });
+        
+        // Dropdown menüye hover yapıldığında menüyü açık tut
+        dropdownMenu.addEventListener('mouseenter', function() {
+            clearTimeout(timeoutId);
+            isMenuOpen = true;
+        });
+        
+        // Kategoriler linkinden çıkıldığında
+        categoriesLink.addEventListener('mouseleave', function() {
+            timeoutId = setTimeout(function() {
+                if (!isMenuOpen) {
+                    dropdownMenu.style.opacity = '0';
+                    dropdownMenu.style.visibility = 'hidden';
+                    dropdownMenu.style.transform = 'translateX(-50%) translateY(-8px)';
+                }
+            }, 100);
+        });
+        
+        // Dropdown menüden çıkıldığında menüyü kapat
+        dropdownMenu.addEventListener('mouseleave', function() {
+            isMenuOpen = false;
+            dropdownMenu.style.opacity = '0';
+            dropdownMenu.style.visibility = 'hidden';
+            dropdownMenu.style.transform = 'translateX(-50%) translateY(-8px)';
+        });
+    }
+});
+
+// Language Menu Toggle
+function toggleLanguageMenu() {
+    const langMenu = document.getElementById('langMenu');
+    if (langMenu) {
+        langMenu.style.display = langMenu.style.display === 'none' ? 'block' : 'none';
+    }
+}
+
+// Theme Toggle
+function toggleTheme() {
+    const body = document.body;
+    const themeIcon = document.getElementById('theme-icon');
+    
+    if (body.getAttribute('data-theme') === 'dark') {
+        body.removeAttribute('data-theme');
+        themeIcon.className = 'fas fa-moon';
+        localStorage.setItem('theme', 'light');
+    } else {
+        body.setAttribute('data-theme', 'dark');
+        themeIcon.className = 'fas fa-sun';
+        localStorage.setItem('theme', 'dark');
+    }
+}
+
+// Load saved theme
+document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('theme');
+    const themeIcon = document.getElementById('theme-icon');
+    
+    if (savedTheme === 'dark') {
+        document.body.setAttribute('data-theme', 'dark');
+        if (themeIcon) {
+            themeIcon.className = 'fas fa-sun';
+        }
+    }
+});

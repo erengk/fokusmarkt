@@ -79,6 +79,20 @@ CREATE TABLE product_variants (
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 );
 
+-- Product Images (Ürün görselleri)
+CREATE TABLE product_images (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    product_id INTEGER NOT NULL,
+    image_path VARCHAR(255) NOT NULL,
+    alt_text VARCHAR(255),
+    form_type VARCHAR(50), -- "malt", "tablet", "jel"
+    language VARCHAR(10) DEFAULT 'tr', -- "tr", "en", "de"
+    sort_order INTEGER DEFAULT 0,
+    is_active BOOLEAN DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
+
 -- Articles (Makaleler)
 CREATE TABLE articles (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -10,18 +10,63 @@ if (empty($productSlug)) {
     exit;
 }
 
+// Get selected form from URL parameter or default to first available form
+$selectedForm = $_GET['form'] ?? '';
+
 // Get product details
 $productDetails = $product->getProductBySlug($productSlug);
-$productImages = $product->getProductImagesBySlug($productSlug);
-$productSpecies = $product->getProductSpecies($productSlug);
+$productForms = $product->getProductForms($productSlug);
 
 if (!$productDetails) {
     header('Location: /404');
     exit;
 }
 
+// If no form selected, select the first available form
+if (empty($selectedForm) && !empty($productForms)) {
+    $selectedForm = $productForms[0]['form_name'];
+}
+
+// Get form-specific variant details
+$selectedVariant = null;
+if ($selectedForm) {
+    $selectedVariant = $product->getProductVariantByForm($productSlug, $selectedForm);
+}
+
+// Get form-specific images
+$productImages = $product->getProductImagesByForm($productSlug, $selectedForm);
+$productSpecies = $product->getProductSpecies($productSlug);
+
 // Get related products
 $relatedProducts = $product->getRelatedProducts($productSlug, $productDetails['category']);
+
+// Prepare JSON data for all forms (for dynamic updates)
+$allFormsData = [];
+if (!empty($productForms)) {
+    foreach ($productForms as $form) {
+        $formName = $form['form_name'];
+        $variant = $product->getProductVariantByForm($productSlug, $formName);
+        $images = $product->getProductImagesByForm($productSlug, $formName);
+        
+        // Form açıklamalarını dil paketinden al
+        $formDescriptions = [
+            'jel' => $lang->get('product.form_jel'),
+            'malt' => $lang->get('product.form_malt'),
+            'tablet' => $lang->get('product.form_tablet')
+        ];
+        
+        $formKey = strtolower($formName);
+        $description = $formDescriptions[$formKey] ?? $form['description'] ?? '';
+        
+        $allFormsData[$formName] = [
+            'images' => $images,
+            'price' => $variant['price'] ?? $productDetails['price'],
+            'old_price' => $variant['old_price'] ?? null,
+            'stock' => $variant['stock'] ?? $productDetails['stock'] ?? 0,
+            'description' => $description
+        ];
+    }
+}
 ?>
 
 <?php include __DIR__ . '/../includes/Header.php'; ?>
@@ -29,8 +74,8 @@ $relatedProducts = $product->getRelatedProducts($productSlug, $productDetails['c
 <main class="product-detail-page">
     <div class="container">
         <!-- Breadcrumb -->
-        <nav class="breadcrumb" aria-label="breadcrumb">
-            <ol class="breadcrumb-list">
+        <nav class="breadcrumb mb-4" aria-label="breadcrumb">
+            <ol class="breadcrumb-list d-flex align-center">
                 <li class="breadcrumb-item">
                     <a href="/"><?php echo $lang->get('nav.home'); ?></a>
                 </li>
@@ -46,11 +91,11 @@ $relatedProducts = $product->getRelatedProducts($productSlug, $productDetails['c
         </nav>
 
         <!-- Product Main Section -->
-        <div class="product-main">
+        <div class="product-main card">
             <div class="product-gallery">
                 <div class="product-gallery-main">
                     <div class="main-image-container">
-                        <img src="<?php echo !empty($productImages) ? $productImages[0]['url'] : '/assets/images/placeholder.jpg'; ?>" 
+                        <img src="<?php echo !empty($productImages) ? $productImages[0]['image_path'] : '/assets/images/placeholder.jpg'; ?>" 
                              alt="<?php echo $productDetails['name']; ?>" 
                              class="main-product-image" 
                              id="mainProductImage">
@@ -61,9 +106,9 @@ $relatedProducts = $product->getRelatedProducts($productSlug, $productDetails['c
                 <div class="product-gallery-thumbs">
                     <?php foreach ($productImages as $index => $image): ?>
                         <div class="thumb-item <?php echo $index === 0 ? 'active' : ''; ?>" 
-                             onclick="changeMainImage('<?php echo $image['url']; ?>', this)">
-                            <img src="<?php echo $image['url']; ?>" 
-                                 alt="<?php echo $productDetails['name'] . ' - ' . $image['form']; ?>" 
+                             onclick="changeMainImage('<?php echo $image['image_path']; ?>', this)">
+                            <img src="<?php echo $image['image_path']; ?>" 
+                                 alt="<?php echo $productDetails['name'] . ' - ' . $image['alt_text']; ?>" 
                                  loading="lazy">
                         </div>
                     <?php endforeach; ?>
@@ -73,21 +118,41 @@ $relatedProducts = $product->getRelatedProducts($productSlug, $productDetails['c
 
             <div class="product-info">
                 <!-- Product Title -->
-                <h1 class="product-title"><?php echo $productDetails['name']; ?></h1>
+                <h1 class="product-title mb-3"><?php echo $productDetails['name']; ?></h1>
                 
                 <!-- Product Rating -->
-                <div class="product-rating">
-                    <div class="stars">
+                <div class="product-rating mb-3">
+                    <div class="stars d-flex">
                         <?php for ($i = 1; $i <= 5; $i++): ?>
                             <i class="fas fa-star <?php echo $i <= 4 ? 'filled' : ''; ?>"></i>
                         <?php endfor; ?>
                     </div>
-                    <span class="rating-text">4.8/5 (<?php echo $lang->get('product.reviews_count'); ?>)</span>
+                    <span class="rating-text"><?php echo $lang->get('product.rating_text'); ?> (<?php echo $lang->get('product.reviews_count'); ?>)</span>
                 </div>
 
+                <!-- Form Selection -->
+                <?php if (!empty($productForms) && count($productForms) > 1): ?>
+                <div class="form-selection mb-3">
+                    <h4 class="mb-2"><?php echo $lang->get('product.select_form'); ?></h4>
+                    <div class="form-options">
+                        <?php foreach ($productForms as $form): ?>
+                            <label class="form-option">
+                                <input type="radio" name="product_form" value="<?php echo $form['form_name']; ?>" 
+                                       <?php echo $selectedForm === $form['form_name'] ? 'checked' : ''; ?>
+                                       onchange="changeProductForm('<?php echo $form['form_name']; ?>')">
+                                <span class="form-option-text">
+                                    <strong><?php echo $product->getProductFormName($form['form_name']); ?></strong>
+                                    <span class="form-description"><?php echo $form['description']; ?></span>
+                                </span>
+                            </label>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+
                 <!-- Short Description (USP) -->
-                <div class="product-usp">
-                    <h3><?php echo $lang->get('product.key_benefits'); ?></h3>
+                <div class="product-usp card">
+                    <h3 class="mb-2"><?php echo $lang->get('product.key_benefits'); ?></h3>
                     <ul class="usp-list">
                         <?php foreach ($productDetails['benefits'] ?? [] as $benefit): ?>
                             <li><i class="fas fa-check"></i> <?php echo $benefit; ?></li>
@@ -98,11 +163,15 @@ $relatedProducts = $product->getRelatedProducts($productSlug, $productDetails['c
                 <!-- Price and Purchase Area -->
                 <div class="product-purchase">
                     <div class="product-price">
-                        <?php if (isset($productDetails['old_price']) && $productDetails['old_price'] > $productDetails['price']): ?>
-                            <span class="old-price"><?php echo number_format($productDetails['old_price'], 2); ?> ₺</span>
-                            <span class="discount-badge">-%<?php echo round((($productDetails['old_price'] - $productDetails['price']) / $productDetails['old_price']) * 100); ?></span>
+                        <?php if ($selectedVariant): ?>
+                            <span class="current-price" id="productPrice"><?php echo number_format($selectedVariant['price'], 2); ?> ₺</span>
+                            <?php if (isset($selectedVariant['old_price']) && $selectedVariant['old_price'] > $selectedVariant['price']): ?>
+                                <span class="old-price" id="productOldPrice"><?php echo number_format($selectedVariant['old_price'], 2); ?> ₺</span>
+                                <span class="discount-badge">-%<?php echo round((($selectedVariant['old_price'] - $selectedVariant['price']) / $selectedVariant['old_price']) * 100); ?></span>
+                            <?php endif; ?>
+                        <?php else: ?>
+                            <span class="current-price" id="productPrice"><?php echo number_format($productDetails['price'], 2); ?> ₺</span>
                         <?php endif; ?>
-                        <span class="current-price"><?php echo number_format($productDetails['price'], 2); ?> ₺</span>
                     </div>
 
                     <div class="purchase-actions">
@@ -120,7 +189,7 @@ $relatedProducts = $product->getRelatedProducts($productSlug, $productDetails['c
 
                     <div class="stock-status">
                         <i class="fas fa-check-circle"></i>
-                        <span><?php echo $lang->get('product.in_stock'); ?></span>
+                        <span id="productStock"><?php echo $lang->get('product.stock_status_available', ['quantity' => $selectedVariant['stock'] ?? $productDetails['stock'] ?? 0]); ?></span>
                     </div>
 
                     <div class="payment-options">
@@ -351,6 +420,9 @@ $relatedProducts = $product->getRelatedProducts($productSlug, $productDetails['c
 </main>
 
 <script>
+// Product data for dynamic updates
+const productFormsData = <?php echo json_encode($allFormsData); ?>;
+
 // Product Gallery
 function changeMainImage(imageSrc, thumbElement) {
     document.getElementById('mainProductImage').src = imageSrc;
@@ -360,6 +432,113 @@ function changeMainImage(imageSrc, thumbElement) {
         thumb.classList.remove('active');
     });
     thumbElement.classList.add('active');
+}
+
+// Form Selection with Dynamic Updates
+function changeProductForm(formName) {
+    if (!productFormsData[formName]) {
+        console.error('Form data not found:', formName);
+        return;
+    }
+    
+    const formData = productFormsData[formName];
+    
+    // Update main image
+    if (formData.images && formData.images.length > 0) {
+        const mainImage = document.getElementById('mainProductImage');
+        mainImage.src = formData.images[0].image_path;
+        mainImage.alt = formData.images[0].alt_text;
+    }
+    
+    // Update thumbnail gallery
+    updateThumbnailGallery(formData.images);
+    
+    // Update price
+    updatePrice(formData.price, formData.old_price);
+    
+    // Update stock information
+    updateStockInfo(formData.stock);
+    
+    // Update URL without page reload
+    const currentUrl = new URL(window.location);
+    currentUrl.searchParams.set('form', formName);
+    window.history.pushState({}, '', currentUrl.toString());
+    
+    // Update form radio button
+    document.querySelectorAll('input[name="product_form"]').forEach(radio => {
+        radio.checked = radio.value === formName;
+    });
+}
+
+// Update thumbnail gallery
+function updateThumbnailGallery(images) {
+    const thumbsContainer = document.querySelector('.product-gallery-thumbs');
+    if (!thumbsContainer || !images || images.length <= 1) {
+        return;
+    }
+    
+    thumbsContainer.innerHTML = '';
+    
+    images.forEach((image, index) => {
+        const thumbItem = document.createElement('div');
+        thumbItem.className = `thumb-item ${index === 0 ? 'active' : ''}`;
+        thumbItem.onclick = () => changeMainImage(image.image_path, thumbItem);
+        
+        const thumbImg = document.createElement('img');
+        thumbImg.src = image.image_path;
+        thumbImg.alt = image.alt_text;
+        thumbImg.loading = 'lazy';
+        
+        thumbItem.appendChild(thumbImg);
+        thumbsContainer.appendChild(thumbItem);
+    });
+}
+
+// Update price display
+function updatePrice(price, oldPrice) {
+    const priceElement = document.getElementById('productPrice');
+    const oldPriceElement = document.getElementById('productOldPrice');
+    const discountBadge = document.querySelector('.discount-badge');
+    
+    if (priceElement) {
+        priceElement.textContent = new Intl.NumberFormat('tr-TR', { 
+            minimumFractionDigits: 2, 
+            maximumFractionDigits: 2 
+        }).format(price) + ' ₺';
+    }
+    
+    if (oldPrice && oldPrice > price) {
+        if (oldPriceElement) {
+            oldPriceElement.textContent = new Intl.NumberFormat('tr-TR', { 
+                minimumFractionDigits: 2, 
+                maximumFractionDigits: 2 
+            }).format(oldPrice) + ' ₺';
+            oldPriceElement.style.display = 'inline';
+        }
+        
+        if (discountBadge) {
+            const discountPercent = Math.round(((oldPrice - price) / oldPrice) * 100);
+            discountBadge.textContent = '-%' + discountPercent;
+            discountBadge.style.display = 'inline';
+        }
+    } else {
+        if (oldPriceElement) oldPriceElement.style.display = 'none';
+        if (discountBadge) discountBadge.style.display = 'none';
+    }
+}
+
+// Update stock information
+function updateStockInfo(stock) {
+    const stockElement = document.getElementById('productStock');
+    if (stockElement) {
+        if (stock > 0) {
+            stockElement.textContent = 'Stokta var (' + stock + ' adet)';
+            stockElement.className = 'stock-status in-stock';
+        } else {
+            stockElement.textContent = 'Stokta yok';
+            stockElement.className = 'stock-status out-of-stock';
+        }
+    }
 }
 
 // Quantity Selector
@@ -372,9 +551,10 @@ function changeQuantity(delta) {
 // Add to Cart
 function addToCart(productSlug) {
     const quantity = document.getElementById('productQuantity').value;
+    const selectedForm = document.querySelector('input[name="product_form"]:checked')?.value || '';
     
     // Add to cart logic here
-    console.log('Adding to cart:', productSlug, 'Quantity:', quantity);
+    console.log('Adding to cart:', productSlug, 'Form:', selectedForm, 'Quantity:', quantity);
     
     // Show success message
     alert('<?php echo $lang->get("product.added_to_cart"); ?>');
