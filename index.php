@@ -59,6 +59,7 @@ switch ($path) {
     case 'bladder-control':
     case 'uticare':
     case 'renacure':
+    case 'salmon-oil':
     case 'salmonoil':
     case 'retino-a':
     case 'phytospan':

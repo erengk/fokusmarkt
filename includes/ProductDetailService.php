@@ -22,7 +22,7 @@ class ProductDetailService {
     // Ürün varyantlarını getir
     public function getProductVariants($productSlug) {
         $variants = $this->db->fetchAll("
-            SELECT id, name, description, price, weight, is_active, sort_order
+            SELECT id, name, description, price, weight, stock, is_active, sort_order
             FROM product_variants pv
             JOIN products p ON pv.product_id = p.id
             WHERE p.slug = ? AND pv.is_active = 1
@@ -63,7 +63,7 @@ class ProductDetailService {
         // Sadece mevcut formlar için veritabanından bilgileri al
         $placeholders = str_repeat('?,', count($availableFormsUpper) - 1) . '?';
         $forms = $this->db->fetchAll("
-            SELECT DISTINCT pv.name as form_name, pv.id, pv.price, pv.weight, pv.description
+            SELECT DISTINCT pv.name as form_name, pv.id, pv.price, pv.weight, pv.stock, pv.description, pv.sort_order
             FROM product_variants pv
             JOIN products p ON pv.product_id = p.id
             WHERE p.slug = ? AND pv.name IN ($placeholders) AND pv.is_active = 1
@@ -82,7 +82,7 @@ class ProductDetailService {
     // Belirli form için ürün varyantını getir
     public function getProductVariantByForm($productSlug, $formName) {
         $variant = $this->db->fetchOne("
-            SELECT pv.id, pv.name, pv.description, pv.price, pv.weight, pv.is_active, pv.sort_order
+            SELECT pv.id, pv.name, pv.description, pv.price, pv.weight, pv.stock, pv.is_active, pv.sort_order
             FROM product_variants pv
             JOIN products p ON pv.product_id = p.id
             WHERE p.slug = ? AND pv.name = ? AND pv.is_active = 1
@@ -104,7 +104,7 @@ class ProductDetailService {
             ORDER BY pi.sort_order
         ", [$productSlug, $lang]);
         
-        // Eğer product_images tablosunda veri yoksa, eski yöntemi kullan
+        // Eğer product_images tablosunda veri yoksa, dosya sisteminden getir
         if (empty($images)) {
             // Dosya sisteminden görselleri getir
             $productKey = strtoupper(str_replace('-', '_', $productSlug));
@@ -121,8 +121,13 @@ class ProductDetailService {
             
             if ($formName && in_array($formNameLower, $availableForms)) {
                 // Belirli form için görseller
-                $imagePath = "/assets/products/{$lang}/{$productSlug}/{$formNameLower}/";
-                $productName = ucfirst($productSlug);
+                // Slug'ı doğru formata çevir (dental-care -> dental_care)
+                $folderSlug = str_replace('-', '_', $productSlug);
+                $imagePath = "/assets/products/{$lang}/{$folderSlug}/{$formNameLower}/";
+                // Dosya adında boşluk olmamalı, alt çizgi kullan
+                // Her kelimenin ilk harfini büyük yap (Bladder_Control)
+                $productName = str_replace('_', ' ', ucfirst(str_replace('-', '_', $productSlug)));
+                $productName = str_replace(' ', '_', ucwords($productName));
                 $formNameCap = ucfirst($formNameLower);
                 $images = [
                     [
@@ -144,8 +149,13 @@ class ProductDetailService {
             } else {
                 // İlk mevcut form için görseller
                 $firstForm = $availableForms[0] ?? 'tablet';
-                $imagePath = "/assets/products/{$lang}/{$productSlug}/{$firstForm}/";
-                $productName = ucfirst($productSlug);
+                // Slug'ı doğru formata çevir (dental-care -> dental_care)
+                $folderSlug = str_replace('-', '_', $productSlug);
+                $imagePath = "/assets/products/{$lang}/{$folderSlug}/{$firstForm}/";
+                // Dosya adında boşluk olmamalı, alt çizgi kullan
+                // Her kelimenin ilk harfini büyük yap (Bladder_Control)
+                $productName = str_replace('_', ' ', ucfirst(str_replace('-', '_', $productSlug)));
+                $productName = str_replace(' ', '_', ucwords($productName));
                 $formNameCap = ucfirst($firstForm);
                 $images = [
                     [
@@ -259,8 +269,8 @@ class ProductDetailService {
             JOIN categories c ON pc.category_id = c.id
             WHERE c.slug = ? AND p.slug != ? AND p.is_active = 1
             ORDER BY p.sort_order
-            LIMIT ?
-        ", [$categorySlug, $productSlug, $limit]);
+            LIMIT " . (int)$limit
+        , [$categorySlug, $productSlug]);
         
         return $related;
     }

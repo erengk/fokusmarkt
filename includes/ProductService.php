@@ -21,347 +21,290 @@ class ProductService {
     
     // Ürün detaylarını getir
     public function getProductBySlug($productSlug) {
-        // Hardcoded ürün verileri (gerçek uygulamada veritabanından gelecek)
-        $products = [
-            'o2-care' => [
-                'name' => 'O2 Care',
-                'description' => 'Solunum sistemi desteği',
-                'price' => 89.99,
-                'category' => 'solunum-sistemi',
-                'benefits' => ['Solunum yollarını açar', 'Nefes almayı kolaylaştırır'],
-                'indications' => ['Solunum güçlüğü', 'Öksürük', 'Burun tıkanıklığı'],
-                'warnings' => ['Veteriner kontrolünde kullanın'],
-                'ingredients' => [
-                    ['name' => 'Vitamin C', 'function' => 'Bağışıklık sistemi desteği'],
-                    ['name' => 'Echinacea', 'function' => 'Doğal bağışıklık güçlendirici'],
-                    ['name' => 'Propolis', 'function' => 'Antibakteriyel etki']
-                ]
-            ],
-            'canivir' => [
-                'name' => 'Canivir',
-                'description' => 'Bağışıklık sistemi desteği',
-                'price' => 129.99,
-                'category' => 'immunoterapi',
-                'benefits' => ['Bağışıklığı güçlendirir', 'Viral enfeksiyonlara karşı korur'],
-                'indications' => ['Bağışıklık zayıflığı', 'Viral enfeksiyonlar'],
-                'warnings' => ['Hamilelikte kullanmayın'],
-                'ingredients' => [
-                    ['name' => 'Lizin', 'function' => 'Amino asit desteği'],
-                    ['name' => 'Vitamin D', 'function' => 'Bağışıklık sistemi desteği'],
-                    ['name' => 'Çinko', 'function' => 'Mineral desteği']
-                ]
-            ],
-            'felovir' => [
-                'name' => 'Felovir',
-                'description' => 'Kedi bağışıklık sistemi desteği',
-                'price' => 119.99,
-                'category' => 'immunoterapi',
-                'benefits' => ['Kedi bağışıklığını güçlendirir', 'Viral enfeksiyonlara karşı korur'],
-                'indications' => ['Kedi bağışıklık zayıflığı', 'Viral enfeksiyonlar'],
-                'warnings' => ['Veteriner kontrolünde kullanın'],
-                'ingredients' => [
-                    ['name' => 'Lizin', 'function' => 'Amino asit desteği'],
-                    ['name' => 'Vitamin C', 'function' => 'Bağışıklık sistemi desteği'],
-                    ['name' => 'Beta Glukan', 'function' => 'Doğal bağışıklık güçlendirici']
-                ]
-            ],
-            'petimmun' => [
-                'name' => 'Petimmun',
-                'description' => 'Evcil hayvan bağışıklık sistemi desteği',
-                'price' => 99.99,
-                'category' => 'immunoterapi',
-                'benefits' => ['Genel bağışıklık desteği', 'Enfeksiyonlara karşı koruma'],
-                'indications' => ['Bağışıklık zayıflığı', 'Genel sağlık desteği'],
-                'warnings' => ['Düzenli kullanım önerilir'],
-                'ingredients' => [
-                    ['name' => 'Vitamin C', 'function' => 'Bağışıklık sistemi desteği'],
-                    ['name' => 'Vitamin E', 'function' => 'Antioksidan etki'],
-                    ['name' => 'Selenyum', 'function' => 'Mineral desteği']
-                ]
-            ],
-            'ease-off' => [
-                'name' => 'Ease Off',
-                'description' => 'Sakinleştirici ve stres azaltıcı',
-                'price' => 89.99,
-                'category' => 'sakinlestirici',
-                'benefits' => ['Stresi azaltır', 'Sakinleştirici etki'],
-                'indications' => ['Stres', 'Anksiyete', 'Sakinleştirme ihtiyacı'],
-                'warnings' => ['Araç kullanımından önce kullanmayın'],
-                'ingredients' => [
-                    ['name' => 'L-Theanine', 'function' => 'Sakinleştirici amino asit'],
-                    ['name' => 'Papatya', 'function' => 'Doğal sakinleştirici'],
-                    ['name' => 'Lavanta', 'function' => 'Stres azaltıcı']
-                ]
-            ],
-            'bladder-control' => [
-                'name' => 'Bladder Control',
-                'description' => 'İdrar kesesi kontrolü ve sağlığı',
-                'price' => 109.99,
-                'category' => 'uriner-sistem',
-                'benefits' => ['İdrar kesesi sağlığını destekler', 'Kontrolü artırır'],
-                'indications' => ['İdrar kaçırma', 'İdrar kesesi problemleri'],
-                'warnings' => ['Veteriner kontrolünde kullanın'],
-                'ingredients' => [
-                    ['name' => 'Cranberry', 'function' => 'İdrar yolu sağlığı'],
-                    ['name' => 'D-Mannose', 'function' => 'Bakteri bağlayıcı'],
-                    ['name' => 'Vitamin C', 'function' => 'Bağışıklık desteği']
-                ]
-            ],
-            'uticare' => [
-                'name' => 'Uticare',
-                'description' => 'Üriner sistem sağlığı',
-                'price' => 94.99,
-                'category' => 'uriner-sistem',
-                'benefits' => ['Üriner sistem sağlığını destekler', 'Enfeksiyonlara karşı korur'],
-                'indications' => ['Üriner sistem problemleri', 'Enfeksiyon riski'],
-                'warnings' => ['Bol su ile kullanın'],
-                'ingredients' => [
-                    ['name' => 'Cranberry', 'function' => 'Doğal antibakteriyel'],
-                    ['name' => 'Vitamin C', 'function' => 'Bağışıklık desteği'],
-                    ['name' => 'Çinko', 'function' => 'Mineral desteği']
-                ]
-            ],
-            'renacure' => [
-                'name' => 'Renacure',
-                'description' => 'Böbrek sağlığı ve fonksiyonu',
-                'price' => 124.99,
-                'category' => 'bobrek-sagligi',
-                'benefits' => ['Böbrek fonksiyonunu destekler', 'Detoks etkisi'],
-                'indications' => ['Böbrek problemleri', 'Detoks ihtiyacı'],
-                'warnings' => ['Veteriner kontrolünde kullanın'],
-                'ingredients' => [
-                    ['name' => 'Milk Thistle', 'function' => 'Karaciğer koruyucu'],
-                    ['name' => 'Dandelion', 'function' => 'Doğal diüretik'],
-                    ['name' => 'Vitamin B', 'function' => 'Enerji metabolizması']
-                ]
-            ],
-            'salmonoil' => [
-                'name' => 'Salmon Oil',
-                'description' => 'Omega-3 yağ asitleri desteği',
-                'price' => 79.99,
-                'category' => 'tuy-ve-deri-sagligi',
-                'benefits' => ['Cilt ve tüy sağlığını destekler', 'Omega-3 desteği'],
-                'indications' => ['Kuru cilt', 'Tüy problemleri', 'Omega-3 eksikliği'],
-                'warnings' => ['Balık alerjisi varsa kullanmayın'],
-                'ingredients' => [
-                    ['name' => 'Omega-3', 'function' => 'Esansiyel yağ asitleri'],
-                    ['name' => 'EPA', 'function' => 'Anti-inflamatuar'],
-                    ['name' => 'DHA', 'function' => 'Beyin sağlığı']
-                ]
-            ],
-            'retino-a' => [
-                'name' => 'Retino-A',
-                'description' => 'Cilt sağlığı ve yenilenmesi',
-                'price' => 89.99,
-                'category' => 'tuy-ve-deri-sagligi',
-                'benefits' => ['Cilt yenilenmesini destekler', 'Akne tedavisi'],
-                'indications' => ['Akne', 'Cilt problemleri', 'Yenilenme ihtiyacı'],
-                'warnings' => ['Güneş ışığından koruyun'],
-                'ingredients' => [
-                    ['name' => 'Retinol', 'function' => 'Cilt yenileyici'],
-                    ['name' => 'Vitamin A', 'function' => 'Cilt sağlığı'],
-                    ['name' => 'Aloe Vera', 'function' => 'Yatıştırıcı etki']
-                ]
-            ],
-            'phytospan' => [
-                'name' => 'Phytospan',
-                'description' => 'Bitkisel solunum sistemi desteği',
-                'price' => 84.99,
-                'category' => 'solunum-sistemi',
-                'benefits' => ['Solunum yollarını açar', 'Bitkisel destek'],
-                'indications' => ['Solunum problemleri', 'Öksürük', 'Soğuk algınlığı'],
-                'warnings' => ['Alerjik reaksiyon riski'],
-                'ingredients' => [
-                    ['name' => 'Echinacea', 'function' => 'Doğal bağışıklık güçlendirici'],
-                    ['name' => 'Thyme', 'function' => 'Solunum yolu açıcı'],
-                    ['name' => 'Honey', 'function' => 'Doğal antibakteriyel']
-                ]
-            ],
-            'multivit' => [
-                'name' => 'Multivit',
-                'description' => 'Çoklu vitamin ve mineral desteği',
-                'price' => 69.99,
-                'category' => 'kemik-sagligi',
-                'benefits' => ['Genel sağlık desteği', 'Vitamin eksikliği giderici'],
-                'indications' => ['Vitamin eksikliği', 'Genel sağlık desteği'],
-                'warnings' => ['Aşırı doz kullanmayın'],
-                'ingredients' => [
-                    ['name' => 'Vitamin A', 'function' => 'Görme sağlığı'],
-                    ['name' => 'Vitamin D', 'function' => 'Kemik sağlığı'],
-                    ['name' => 'Vitamin E', 'function' => 'Antioksidan']
-                ]
-            ],
-            'm-b-care' => [
-                'name' => 'M&B Care',
-                'description' => 'Gebelik ve emzirme dönemi desteği',
-                'price' => 114.99,
-                'category' => 'gebelik-ve-emzirme-sagligi',
-                'benefits' => ['Gebelik dönemi desteği', 'Emzirme kalitesini artırır'],
-                'indications' => ['Gebelik dönemi', 'Emzirme dönemi'],
-                'warnings' => ['Veteriner kontrolünde kullanın'],
-                'ingredients' => [
-                    ['name' => 'Folic Acid', 'function' => 'Gebelik desteği'],
-                    ['name' => 'Iron', 'function' => 'Demir desteği'],
-                    ['name' => 'Calcium', 'function' => 'Kalsiyum desteği']
-                ]
-            ],
-            'dermacumin' => [
-                'name' => 'Dermacumin',
-                'description' => 'Cilt ve tüy sağlığı',
-                'price' => 94.99,
-                'category' => 'tuy-ve-deri-sagligi',
-                'benefits' => ['Cilt sağlığını destekler', 'Tüy kalitesini artırır'],
-                'indications' => ['Cilt problemleri', 'Tüy problemleri'],
-                'warnings' => ['Düzenli kullanım önerilir'],
-                'ingredients' => [
-                    ['name' => 'Biotin', 'function' => 'Tüy sağlığı'],
-                    ['name' => 'Zinc', 'function' => 'Cilt sağlığı'],
-                    ['name' => 'Omega-6', 'function' => 'Esansiyel yağ asitleri']
-                ]
-            ],
-            'derma-zn' => [
-                'name' => 'Derma-Zn',
-                'description' => 'Çinko destekli cilt sağlığı',
-                'price' => 79.99,
-                'category' => 'tuy-ve-deri-sagligi',
-                'benefits' => ['Çinko desteği', 'Cilt sağlığını destekler'],
-                'indications' => ['Çinko eksikliği', 'Cilt problemleri'],
-                'warnings' => ['Aşırı doz kullanmayın'],
-                'ingredients' => [
-                    ['name' => 'Zinc', 'function' => 'Cilt sağlığı'],
-                    ['name' => 'Vitamin C', 'function' => 'Antioksidan'],
-                    ['name' => 'Copper', 'function' => 'Mineral dengesi']
-                ]
-            ],
-            'derma-hairball' => [
-                'name' => 'Derma Hairball',
-                'description' => 'Tüy yumağı kontrolü ve cilt sağlığı',
-                'price' => 89.99,
-                'category' => 'tuy-ve-deri-sagligi',
-                'benefits' => ['Tüy yumağı oluşumunu önler', 'Cilt sağlığını destekler'],
-                'indications' => ['Tüy yumağı problemi', 'Cilt problemleri'],
-                'warnings' => ['Düzenli taranma önerilir'],
-                'ingredients' => [
-                    ['name' => 'Psyllium', 'function' => 'Sindirim desteği'],
-                    ['name' => 'Fish Oil', 'function' => 'Omega-3 desteği'],
-                    ['name' => 'Vitamin E', 'function' => 'Cilt sağlığı']
-                ]
-            ],
-            'dental-care' => [
-                'name' => 'Dental Care',
-                'description' => 'Ağız ve diş sağlığı',
-                'price' => 79.99,
-                'category' => 'agiz-ve-dis-sagligi',
-                'benefits' => ['Diş taşını önler', 'Ağız kokusunu giderir'],
-                'indications' => ['Diş taşı', 'Ağız kokusu', 'Diş eti problemleri'],
-                'warnings' => ['Düzenli diş fırçalama ile birlikte kullanın'],
-                'ingredients' => [
-                    ['name' => 'Klorofil', 'function' => 'Doğal temizleyici'],
-                    ['name' => 'Mentol', 'function' => 'Ferahlatıcı etki'],
-                    ['name' => 'Kalsiyum', 'function' => 'Diş sağlığı desteği']
-                ]
-            ],
-            'coprophagia' => [
-                'name' => 'Coprophagia',
-                'description' => 'Dışkı yeme davranışı kontrolü',
-                'price' => 84.99,
-                'category' => 'diski-yeme',
-                'benefits' => ['Dışkı yeme davranışını azaltır', 'Sindirim sağlığını destekler'],
-                'indications' => ['Dışkı yeme davranışı', 'Sindirim problemleri'],
-                'warnings' => ['Davranış değişikliği zaman alabilir'],
-                'ingredients' => [
-                    ['name' => 'Probiotics', 'function' => 'Sindirim sağlığı'],
-                    ['name' => 'Enzymes', 'function' => 'Sindirim desteği'],
-                    ['name' => 'Fiber', 'function' => 'Bağırsak sağlığı']
-                ]
-            ],
-            'cartilagoflex' => [
-                'name' => 'Cartilagoflex',
-                'description' => 'Eklem sağlığı ve esnekliği',
-                'price' => 119.99,
-                'category' => 'eklem-sagligi',
-                'benefits' => ['Eklem esnekliğini artırır', 'Eklem sağlığını destekler'],
-                'indications' => ['Eklem problemleri', 'Hareket zorluğu'],
-                'warnings' => ['Düzenli egzersiz ile birlikte kullanın'],
-                'ingredients' => [
-                    ['name' => 'Glucosamine', 'function' => 'Eklem sağlığı'],
-                    ['name' => 'Chondroitin', 'function' => 'Kıkırdak desteği'],
-                    ['name' => 'MSM', 'function' => 'Sülfür desteği']
-                ]
-            ]
-        ];
+        // Veritabanından ürün bilgilerini getir
+        $product = $this->db->fetchOne("
+            SELECT p.*, 
+                   GROUP_CONCAT(DISTINCT c.slug) as categories,
+                   GROUP_CONCAT(DISTINCT s.name) as species
+            FROM products p
+            LEFT JOIN product_categories pc ON p.id = pc.product_id
+            LEFT JOIN categories c ON pc.category_id = c.id
+            LEFT JOIN product_species ps ON p.id = ps.product_id
+            LEFT JOIN species s ON ps.species_id = s.id
+            WHERE p.slug = ? AND p.is_active = 1
+            GROUP BY p.id
+        ", [$productSlug]);
         
-        $product = $products[$productSlug] ?? null;
         if (!$product) {
             return null;
         }
         
-        // Dil paketinden çevirileri uygula
-        $translatedName = $this->lang->get("products.{$productSlug}.name");
-        if ($translatedName && $translatedName !== "products.{$productSlug}.name") {
-            $product['name'] = $translatedName;
+        // Ürün endikasyonlarını getir
+        $indications = $this->db->fetchAll("
+            SELECT i.name as indication_text
+            FROM indications i
+            JOIN product_indications pi ON i.id = pi.indication_id
+            JOIN products p ON pi.product_id = p.id
+            WHERE p.slug = ? AND i.is_active = 1
+            ORDER BY i.sort_order
+        ", [$productSlug]);
+        
+        // Ürün faydalarını getir (products tablosundan)
+        $benefits = [];
+        if (!empty($product['benefits'])) {
+            $benefits = is_string($product['benefits']) ? json_decode($product['benefits'], true) : $product['benefits'];
         }
+        
+        // Ürün uyarılarını getir
+        $warnings = $this->db->fetchAll("
+            SELECT warning_text
+            FROM product_warnings pw
+            JOIN products p ON pw.product_id = p.id
+            WHERE p.slug = ? AND pw.is_active = 1
+            ORDER BY pw.sort_order
+        ", [$productSlug]);
+        
+        // Ürün içeriklerini getir
+        $ingredients = $this->db->fetchAll("
+            SELECT ingredient_name as name, function_description as `function`
+            FROM product_ingredients pi
+            JOIN products p ON pi.product_id = p.id
+            WHERE p.slug = ? AND pi.is_active = 1
+            ORDER BY pi.sort_order
+        ", [$productSlug]);
+        
+        // Veriyi birleştir
+        $product['indications'] = array_column($indications, 'indication_text');
+        $product['benefits'] = $benefits;
+        
+        // FAQ verilerini getir (products tablosundan)
+        $faq = [];
+        if (!empty($product['faq'])) {
+            $faq = is_string($product['faq']) ? json_decode($product['faq'], true) : $product['faq'];
+        }
+        $product['faq'] = $faq;
+        
+        $product['warnings'] = array_column($warnings, 'warning_text');
+        $product['ingredients'] = $ingredients;
+        $product['category'] = $product['categories'] ? explode(',', $product['categories'])[0] : '';
         
         return $product;
     }
     
-    // Ürün görsellerini getir
+    // Ürün slug'ına göre görselleri getir
     public function getProductImagesBySlug($productSlug) {
-        $images = [];
-        $basePath = "assets/products/{$this->lang->getCurrentLang()}";
+        $lang = $this->lang->getCurrentLang();
         
-        // Ürün slug'ını dosya sistemi formatına çevir
-        $fileSystemSlug = str_replace(['-', '_'], '_', $productSlug);
-        
-        // Alt klasörleri tara (malt, tablet, jel, vb.)
-        $productPath = $basePath . '/' . $fileSystemSlug;
-        if (is_dir($productPath)) {
-            $subFolders = scandir($productPath);
-            foreach ($subFolders as $subFolder) {
-                if ($subFolder === '.' || $subFolder === '..') continue;
-                
-                $fullPath = $productPath . '/' . $subFolder;
-                if (is_dir($fullPath)) {
-                    $files = scandir($fullPath);
-                    foreach ($files as $file) {
-                        if (in_array(pathinfo($file, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
-                            $images[] = [
-                                'filename' => $file,
-                                'path' => $fullPath . '/' . $file,
-                                'url' => '/' . $fullPath . '/' . $file,
-                                'product' => $productSlug,
-                                'form' => $subFolder
-                            ];
-                        }
-                    }
-                }
-            }
-        }
+        $images = $this->db->fetchAll("
+            SELECT pi.image_path, pi.alt_text, pi.sort_order
+            FROM product_images pi
+            JOIN products p ON pi.product_id = p.id
+            WHERE p.slug = ? AND pi.language = ? AND pi.is_active = 1
+            ORDER BY pi.sort_order
+        ", [$productSlug, $lang]);
         
         return $images;
     }
     
+    // Tüm ürünleri getir
+    public function getAllProducts() {
+        $products = $this->db->fetchAll("
+            SELECT p.*, 
+                   GROUP_CONCAT(DISTINCT c.name) as category_names,
+                   GROUP_CONCAT(DISTINCT s.name) as species_names
+            FROM products p
+            LEFT JOIN product_categories pc ON p.id = pc.product_id
+            LEFT JOIN categories c ON pc.category_id = c.id
+            LEFT JOIN product_species ps ON p.id = ps.product_id
+            LEFT JOIN species s ON ps.species_id = s.id
+            WHERE p.is_active = 1
+            GROUP BY p.id
+            ORDER BY p.sort_order, p.name
+        ");
+        
+        return $products;
+    }
+    
     // Kategoriye göre ürünleri getir
-    public function getProductsByCategory($category) {
-        // CategoryService'i kullan
-        $categoryService = CategoryService::getInstance();
-        return $categoryService->getProductsByCategory($category);
+    public function getProductsByCategory($categorySlug) {
+        $products = $this->db->fetchAll("
+            SELECT p.*, 
+                   GROUP_CONCAT(DISTINCT c.name) as category_names,
+                   GROUP_CONCAT(DISTINCT s.name) as species_names,
+                   MIN(pv.price) as price
+            FROM products p
+            JOIN product_categories pc ON p.id = pc.product_id
+            JOIN categories c ON pc.category_id = c.id
+            LEFT JOIN product_species ps ON p.id = ps.product_id
+            LEFT JOIN species s ON ps.species_id = s.id
+            LEFT JOIN product_variants pv ON p.id = pv.product_id AND pv.is_active = 1
+            WHERE c.slug = ? AND p.is_active = 1
+            GROUP BY p.id
+            ORDER BY p.sort_order, p.name
+        ", [$categorySlug]);
+        
+        return $products;
+    }
+    
+    // Tür'e göre ürünleri getir
+    public function getProductsBySpecies($speciesSlug) {
+        $products = $this->db->fetchAll("
+            SELECT p.*, 
+                   GROUP_CONCAT(DISTINCT c.name) as category_names,
+                   GROUP_CONCAT(DISTINCT s.name) as species_names
+            FROM products p
+            JOIN product_species ps ON p.id = ps.product_id
+            JOIN species s ON ps.species_id = s.id
+            LEFT JOIN product_categories pc ON p.id = pc.product_id
+            LEFT JOIN categories c ON pc.category_id = c.id
+            WHERE s.slug = ? AND p.is_active = 1
+            GROUP BY p.id
+            ORDER BY p.sort_order, p.name
+        ", [$speciesSlug]);
+        
+        return $products;
+    }
+    
+    // Ürün arama
+    public function searchProducts($query) {
+        $searchTerm = '%' . $query . '%';
+        
+        $products = $this->db->fetchAll("
+            SELECT p.*, 
+                   GROUP_CONCAT(DISTINCT c.name) as category_names,
+                   GROUP_CONCAT(DISTINCT s.name) as species_names
+            FROM products p
+            LEFT JOIN product_categories pc ON p.id = pc.product_id
+            LEFT JOIN categories c ON pc.category_id = c.id
+            LEFT JOIN product_species ps ON p.id = ps.product_id
+            LEFT JOIN species s ON ps.species_id = s.id
+            WHERE (p.name LIKE ? OR p.description LIKE ? OR p.short_description LIKE ?) 
+                  AND p.is_active = 1
+            GROUP BY p.id
+            ORDER BY p.sort_order, p.name
+        ", [$searchTerm, $searchTerm, $searchTerm]);
+        
+        return $products;
     }
     
     // İlgili ürünleri getir
-    public function getRelatedProducts($productSlug, $limit = 4) {
-        $product = $this->getProductBySlug($productSlug);
-        if (!$product) return [];
+    public function getRelatedProducts($productSlug, $categorySlug, $limit = 4) {
+        $related = $this->db->fetchAll("
+            SELECT p.id, p.name, p.slug, p.description, p.short_description
+            FROM products p
+            JOIN product_categories pc ON p.id = pc.product_id
+            JOIN categories c ON pc.category_id = c.id
+            WHERE c.slug = ? AND p.slug != ? AND p.is_active = 1
+            ORDER BY p.sort_order
+            LIMIT ?
+        ", [$categorySlug, $productSlug, $limit]);
         
-        $category = $product['category'];
-        $categoryProducts = $this->getProductsByCategory($category);
+        return $related;
+    }
+    
+    // Ürün varyantlarını getir
+    public function getProductVariants($productSlug) {
+        $variants = $this->db->fetchAll("
+            SELECT pv.id, pv.name, pv.description, pv.price, pv.weight, pv.is_active, pv.sort_order
+            FROM product_variants pv
+            JOIN products p ON pv.product_id = p.id
+            WHERE p.slug = ? AND pv.is_active = 1
+            ORDER BY pv.sort_order
+        ", [$productSlug]);
         
-        // Aynı ürünü hariç tut
-        $related = array_filter($categoryProducts, function($p) use ($productSlug) {
-            return $p['slug'] !== $productSlug;
-        });
+        return $variants;
+    }
+    
+    // Ürün görsellerini getir
+    public function getProductImages($productSlug) {
+        $lang = $this->lang->getCurrentLang();
         
-        return array_slice($related, 0, $limit);
+        $images = $this->db->fetchAll("
+            SELECT pi.image_path, pi.alt_text, pi.form_type, pi.sort_order
+            FROM product_images pi
+            JOIN products p ON pi.product_id = p.id
+            WHERE p.slug = ? AND pi.language = ? AND pi.is_active = 1
+            ORDER BY pi.sort_order
+        ", [$productSlug, $lang]);
+        
+        return $images;
+    }
+    
+    // Ürün video yolunu getir
+    public function getProductVideo($productSlug, $lang = 'tr') {
+        // Video dosya adını oluştur
+        $videoFileName = $this->generateVideoFileName($productSlug);
+        if (!$videoFileName) {
+            return null;
+        }
+        
+        $videoPath = "/assets/reels/{$lang}/{$videoFileName}";
+        
+        // Video dosyasının var olup olmadığını kontrol et
+        $fullPath = __DIR__ . "/../assets/reels/{$lang}/{$videoFileName}";
+        if (file_exists($fullPath)) {
+            return $videoPath;
+        }
+        
+        return null;
+    }
+    
+    // Birlikte iyi gider ürünlerini getir
+    public function getComplementaryProducts($productSlug, $limit = 6) {
+        $limit = (int)$limit;
+        
+        // Ana sorgu - temel bilgiler
+        $sql = "SELECT p.id, p.name, p.slug, p.short_description, p.video_path
+                FROM products p
+                JOIN complementary_products cp ON p.id = cp.complementary_product_id
+                JOIN products main_product ON cp.main_product_id = main_product.id
+                WHERE main_product.slug = ? AND p.is_active = 1 AND cp.is_active = 1
+                ORDER BY cp.sort_order, p.name
+                LIMIT " . $limit;
+        
+        $complementary = $this->db->fetchAll($sql, [$productSlug]);
+        
+        // Fiyat bilgisini ayrı sorgu ile ekle
+        foreach ($complementary as &$product) {
+            $priceResult = $this->db->fetchOne("
+                SELECT MIN(price) as min_price 
+                FROM product_variants 
+                WHERE product_id = ? AND is_active = 1
+            ", [$product['id']]);
+            
+            $product['price'] = $priceResult['min_price'] ?? 0;
+        }
+        
+        return $complementary;
+    }
+    
+    // Video dosya adını oluştur
+    private function generateVideoFileName($productSlug) {
+        // Ürün slug'ını video dosya adına çevir
+        $videoMap = [
+            'dental-care' => '26_Dental_Care_Tablet.mov',
+            'dermacumin' => '2_Dermacumin_Plus_Jel.mov',
+            'retino-a' => '29_Retino_A_Jel.mov',
+            'derma-zn' => '16_Derma_Zn_Tablet.mov',
+            'derma-hairball' => '27_Derma_Hairball_Tablet.mov',
+            'phytospan' => '7_Phytospan_Tablet.mov',
+            'bladder-control' => '3_Bladder_Control_Malt.mov',
+            'o2-care' => '1_O2_Care_Plus_Malt.mov',
+            'cartilagoflex' => '5_Cartilagoflex_Tablet.mov',
+            'coprophagia' => '13_Coprophagia_Tablet.mov',
+            'canivir' => '11_Canivir_Tablet.mov',
+            'uticare' => '9_Uticare_Tablet.mov',
+            'ease-off' => '17_Ease_Off_Tablet.mov',
+            'm-b-care' => '19_M_B_Care_Tablet.mov',
+            'multivit' => '21_Multivit_Tablet.mov',
+            'petimmun' => '23_Petimmun_Malt.mov',
+            'renacure' => '24_Renacure_Malt.mov',
+            'felovir' => '25_Felovir_Malt.mov',
+            'salmon-oil' => '28_Salmonoil_Tablet.mov',
+            'salmonoil' => '28_Salmonoil_Tablet.mov'
+        ];
+        
+        return $videoMap[$productSlug] ?? null;
     }
 }
 ?>

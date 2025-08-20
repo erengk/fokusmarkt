@@ -191,5 +191,9 @@ class Product {
     public function getRelatedProducts($productSlug, $categorySlug, $limit = 4) {
         return $this->productDetailService->getRelatedProducts($productSlug, $categorySlug, $limit);
     }
+    
+    public function getComplementaryProducts($productSlug, $limit = 6) {
+        return $this->productService->getComplementaryProducts($productSlug, $limit);
+    }
 }
 ?>

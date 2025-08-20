@@ -1,0 +1,23 @@
+# Video MIME Types
+AddType video/quicktime .mov
+AddType video/mp4 .mp4
+AddType video/webm .webm
+
+# Enable CORS for video files
+<FilesMatch "\.(mov|mp4|webm)$">
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, OPTIONS"
+    Header set Access-Control-Allow-Headers "Range"
+</FilesMatch>
+
+# Enable range requests for video streaming
+<FilesMatch "\.(mov|mp4|webm)$">
+    Header set Accept-Ranges "bytes"
+</FilesMatch>
+
+# Cache video files
+<FilesMatch "\.(mov|mp4|webm)$">
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+    Header set Cache-Control "public, max-age=2592000"
+</FilesMatch>

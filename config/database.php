@@ -1,13 +1,13 @@
 <?php
 // Database Configuration
-define('DB_TYPE', 'sqlite'); // sqlite, mysql, pgsql
+define('DB_TYPE', 'mysql'); // sqlite, mysql, pgsql
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'fokusmarkt');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_CHARSET', 'utf8mb4');
 
-// SQLite Database Path
+// SQLite Database Path (for backup)
 define('DB_PATH', __DIR__ . '/../database/fokusmarkt.db');
 
 // Site Configuration

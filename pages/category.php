@@ -2,7 +2,7 @@
 $lang = Language::getInstance();
 $product = Product::getInstance();
 
-$category = $_GET['category'] ?? '';
+$category = $_GET['category'] ?? $_GET['pet_type'] ?? '';
 $subcategory = $_GET['subcategory'] ?? '';
 
 if (!$category) {
@@ -146,31 +146,46 @@ $breadcrumb = $product->getCategoryBreadcrumb($category, $subcategory);
                     </div>
                     
                     <div class="products-grid">
-                        <?php foreach ($products as $productSlug => $productData): ?>
-                            <div class="product-card card" data-category="<?php echo $category; ?>" data-pet-types="<?php echo implode(' ', $productData['pet_types'] ?? []); ?>">
+                        <?php foreach ($products as $productData): ?>
+                            <div class="product-card card" data-category="<?php echo $category; ?>">
                                 <div class="product-image">
-                                    <a href="/<?php echo $productSlug; ?>">
-                                        <img src="<?php echo $productData['image'] ?? '/assets/images/placeholder.jpg'; ?>" 
-                                             alt="<?php echo $productData['name']; ?>" 
-                                             loading="lazy">
-                                    </a>
+                                    <?php if (!empty($productData['video_path'])): ?>
+                                        <video 
+                                            src="<?php echo $productData['video_path']; ?>" 
+                                            muted 
+                                            loop 
+                                            preload="metadata"
+                                            onmouseover="this.play()" 
+                                            onmouseout="this.pause(); this.currentTime=0;"
+                                            onclick="window.location.href='/<?php echo $productData['slug']; ?>'">
+                                        </video>
+                                        <div class="video-play-overlay" onclick="window.location.href='/<?php echo $productData['slug']; ?>'">
+                                            <i class="fas fa-play"></i>
+                                        </div>
+                                    <?php else: ?>
+                                        <a href="/<?php echo $productData['slug']; ?>">
+                                            <img src="<?php echo $productData['image'] ?? '/assets/images/placeholder.jpg'; ?>" 
+                                                 alt="<?php echo $productData['name']; ?>" 
+                                                 loading="lazy">
+                                        </a>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="product-info">
                                     <h3 class="product-title">
-                                        <a href="/<?php echo $productSlug; ?>"><?php echo $productData['name']; ?></a>
+                                        <a href="/<?php echo $productData['slug']; ?>"><?php echo $productData['name']; ?></a>
                                     </h3>
                                     <div class="product-meta">
-                                        <span class="product-brand"><?php echo $productData['brand'] ?? ''; ?></span>
-                                        <span class="product-category"><?php echo $productData['category'] ?? ''; ?></span>
+                                        <span class="product-brand">Fokus Markt</span>
+                                        <span class="product-category"><?php echo $productData['category_names'] ?? ''; ?></span>
                                     </div>
                                     <div class="product-price">
-                                        <span class="current-price"><?php echo number_format($productData['price'], 2); ?> ₺</span>
+                                        <span class="current-price"><?php echo number_format($productData['price'] ?? 0, 2); ?> ₺</span>
                                         <?php if (isset($productData['old_price']) && $productData['old_price'] > $productData['price']): ?>
                                             <span class="old-price"><?php echo number_format($productData['old_price'], 2); ?> ₺</span>
                                         <?php endif; ?>
                                     </div>
                                     <div class="product-actions">
-                                        <a href="/<?php echo $productSlug; ?>" class="btn btn-primary"><?php echo $lang->get('product.view_details'); ?></a>
+                                        <a href="/<?php echo $productData['slug']; ?>" class="btn btn-primary"><?php echo $lang->get('product.view_details'); ?></a>
                                     </div>
                                 </div>
                             </div>
@@ -181,5 +196,43 @@ $breadcrumb = $product->getCategoryBreadcrumb($category, $subcategory);
         </div>
     </section>
 </main>
+
+<script>
+// Product cards animation
+document.addEventListener('DOMContentLoaded', function() {
+    const productCards = document.querySelectorAll('.product-card');
+    
+    // Intersection Observer for animation
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('animate-in');
+                }, index * 100); // Stagger animation
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    productCards.forEach(card => {
+        observer.observe(card);
+    });
+    
+    // Video hover effects
+    const videos = document.querySelectorAll('.product-image video');
+    videos.forEach(video => {
+        video.addEventListener('mouseenter', function() {
+            this.play();
+        });
+        
+        video.addEventListener('mouseleave', function() {
+            this.pause();
+            this.currentTime = 0;
+        });
+    });
+});
+</script>
 
 <?php include __DIR__ . '/../includes/Footer.php'; ?>

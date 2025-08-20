@@ -84,7 +84,7 @@ $currentLang = $lang->getCurrentLang();
                                             <li><a href="/retino-a">Retino-A</a></li>
                                             <li><a href="/derma-zn">Derma Zn</a></li>
                                             <li><a href="/derma-hairball">Derma Hairball</a></li>
-                                            <li><a href="/salmonoil">Salmon Oil</a></li>
+                                            <li><a href="/salmonoil">Salmonoil</a></li>
                                         </ul>
                                     </div>
                                     <div class="dropdown-section">

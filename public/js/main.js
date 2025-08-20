@@ -517,3 +517,190 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+// Product Page Functions
+// Product Gallery
+function changeMainImage(imageSrc, thumbElement) {
+    const mainImage = document.getElementById('mainProductImage');
+    if (mainImage) {
+        mainImage.src = imageSrc;
+    }
+    
+    // Update active thumb
+    document.querySelectorAll('.thumb-item').forEach(thumb => {
+        thumb.classList.remove('active');
+    });
+    if (thumbElement) {
+        thumbElement.classList.add('active');
+    }
+}
+
+// Form Selection with Dynamic Updates
+function changeProductForm(formName) {
+    // Check if productFormsData exists (defined in product.php)
+    if (typeof productFormsData === 'undefined' || !productFormsData[formName]) {
+        console.error('Form data not found:', formName);
+        return;
+    }
+    
+    const formData = productFormsData[formName];
+    
+    // Update main image
+    if (formData.images && formData.images.length > 0) {
+        const mainImage = document.getElementById('mainProductImage');
+        if (mainImage) {
+            mainImage.src = formData.images[0].image_path;
+            mainImage.alt = formData.images[0].alt_text || '';
+        }
+    }
+    
+    // Update thumbnail gallery
+    updateThumbnailGallery(formData.images);
+    
+    // Update price
+    updatePrice(formData.price, formData.old_price);
+    
+    // Update stock information
+    updateStockInfo(formData.stock);
+    
+    // Update URL without page reload
+    const currentUrl = new URL(window.location);
+    currentUrl.searchParams.set('form', formName);
+    window.history.pushState({}, '', currentUrl.toString());
+    
+    // Update form radio button
+    document.querySelectorAll('input[name="product_form"]').forEach(radio => {
+        radio.checked = radio.value === formName;
+    });
+}
+
+// Update thumbnail gallery
+function updateThumbnailGallery(images) {
+    const thumbsContainer = document.querySelector('.product-gallery-thumbs');
+    if (!thumbsContainer || !images || images.length <= 1) {
+        return;
+    }
+    
+    thumbsContainer.innerHTML = '';
+    
+    images.forEach((image, index) => {
+        const thumbItem = document.createElement('div');
+        thumbItem.className = `thumb-item ${index === 0 ? 'active' : ''}`;
+        thumbItem.onclick = () => changeMainImage(image.image_path, thumbItem);
+        
+        const thumbImg = document.createElement('img');
+        thumbImg.src = image.image_path;
+        thumbImg.alt = image.alt_text || '';
+        thumbImg.loading = 'lazy';
+        
+        thumbItem.appendChild(thumbImg);
+        thumbsContainer.appendChild(thumbItem);
+    });
+}
+
+// Update price display
+function updatePrice(price, oldPrice) {
+    const priceElement = document.getElementById('productPrice');
+    const oldPriceElement = document.getElementById('productOldPrice');
+    const discountBadge = document.querySelector('.discount-badge');
+    
+    if (priceElement && price !== undefined) {
+        priceElement.textContent = new Intl.NumberFormat('tr-TR', { 
+            minimumFractionDigits: 2, 
+            maximumFractionDigits: 2 
+        }).format(price) + ' ₺';
+    }
+    
+    if (oldPrice && oldPrice > price) {
+        if (oldPriceElement) {
+            oldPriceElement.textContent = new Intl.NumberFormat('tr-TR', { 
+                minimumFractionDigits: 2, 
+                maximumFractionDigits: 2 
+            }).format(oldPrice) + ' ₺';
+            oldPriceElement.style.display = 'inline';
+        }
+        
+        if (discountBadge) {
+            const discountPercent = Math.round(((oldPrice - price) / oldPrice) * 100);
+            discountBadge.textContent = '-%' + discountPercent;
+            discountBadge.style.display = 'inline';
+        }
+    } else {
+        if (oldPriceElement) oldPriceElement.style.display = 'none';
+        if (discountBadge) discountBadge.style.display = 'none';
+    }
+}
+
+// Update stock information
+function updateStockInfo(stock) {
+    const stockElement = document.getElementById('productStock');
+    if (stockElement && stock !== undefined) {
+        if (stock > 0) {
+            stockElement.textContent = 'Stokta var (' + stock + ' adet)';
+            stockElement.className = 'stock-status in-stock';
+        } else {
+            stockElement.textContent = 'Stokta yok';
+            stockElement.className = 'stock-status out-of-stock';
+        }
+    }
+}
+
+// Quantity Selector
+function changeQuantity(delta) {
+    const input = document.getElementById('productQuantity');
+    if (input) {
+        const newValue = Math.max(1, Math.min(99, parseInt(input.value) + delta));
+        input.value = newValue;
+    }
+}
+
+// Add to Cart
+function addToCart(productSlug) {
+    const quantity = document.getElementById('productQuantity');
+    const selectedForm = document.querySelector('input[name="product_form"]:checked');
+    
+    const qty = quantity ? quantity.value : 1;
+    const form = selectedForm ? selectedForm.value : '';
+    
+    // Add to cart logic here
+    console.log('Adding to cart:', productSlug, 'Form:', form, 'Quantity:', qty);
+    
+    // Show success message
+    alert('Ürün sepete eklendi!');
+}
+
+// Tab Navigation
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            
+            // Update active tab button
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Update active tab panel
+            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+            const targetPanel = document.getElementById(tabId);
+            if (targetPanel) {
+                targetPanel.classList.add('active');
+            }
+        });
+    });
+});
+
+// FAQ Toggle
+function toggleFAQ(questionElement) {
+    const answerElement = questionElement.nextElementSibling;
+    const icon = questionElement.querySelector('i');
+    
+    if (answerElement && icon) {
+        if (answerElement.style.display === 'block') {
+            answerElement.style.display = 'none';
+            icon.className = 'fas fa-chevron-down';
+        } else {
+            answerElement.style.display = 'block';
+            icon.className = 'fas fa-chevron-up';
+        }
+    }
+}

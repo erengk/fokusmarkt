@@ -84,7 +84,7 @@ $categories = $product->getAllCategoriesWithInfo();
                         <div class="pet-type-content">
                             <h3><?php echo $lang->get("pet_types.{$petTypeKey}"); ?></h3>
                             <p><?php echo $lang->get('home.pet_types_subtitle'); ?></p>
-                            <a href="/category?pet_type=<?php echo $petTypeKey; ?>" class="btn btn-secondary"><?php echo $lang->get('home.view_products'); ?></a>
+                            <a href="/category?category=<?php echo $petTypeKey; ?>" class="btn btn-secondary"><?php echo $lang->get('home.view_products'); ?></a>
                         </div>
                     </div>
                 <?php endforeach; ?>
